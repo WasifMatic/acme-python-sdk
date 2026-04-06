@@ -11,15 +11,15 @@ The package is compatible with Python versions `3.7+`.
 Install the package from PyPi using the following pip command:
 
 ```bash
-pip install cli-sdk==1.0.0
+pip install cli-sdk==1.0.15
 ```
 
 You can also view the package at:
-https://pypi.python.org/pypi/cli-sdk/1.0.0
+https://pypi.python.org/pypi/cli-sdk/1.0.15
 
 ## Initialize the API Client
 
-**_Note:_** Documentation for the client can be found [here.](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/client.md)
+**_Note:_** Documentation for the client can be found [here.](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/client.md)
 
 The following parameters are configurable for the API Client:
 
@@ -33,7 +33,7 @@ The following parameters are configurable for the API Client:
 | backoff_factor | `float` | A backoff factor to apply between attempts after the second try. <br> **Default: 2** |
 | retry_statuses | `Array of int` | The http statuses on which retry is to be done. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
 | retry_methods | `Array of string` | The http methods on which retry is to be done. <br> **Default: ["GET", "PUT"]** |
-| proxy_settings | [`ProxySettings`](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
+| proxy_settings | [`ProxySettings`](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
 
 The API client can be initialized as follows:
 
@@ -57,28 +57,28 @@ from apimaticcalculator.apimaticcalculator_client import ApimaticcalculatorClien
 client = ApimaticcalculatorClient.from_environment(dotenv_path='/path/to/.env')
 ```
 
-See the [Environment-Based Client Initialization](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/environment-based-client-initialization.md) section for details.
+See the [Environment-Based Client Initialization](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/environment-based-client-initialization.md) section for details.
 
 ## List of APIs
 
-* [Simple Calculator](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/controllers/simple-calculator.md)
+* [Simple Calculator](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/controllers/simple-calculator.md)
 
 ## SDK Infrastructure
 
 ### Configuration
 
-* [ProxySettings](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/proxy-settings.md)
-* [Environment-Based Client Initialization](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/environment-based-client-initialization.md)
+* [ProxySettings](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/proxy-settings.md)
+* [Environment-Based Client Initialization](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/environment-based-client-initialization.md)
 
 ### HTTP
 
-* [HttpResponse](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/http-response.md)
-* [HttpRequest](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/http-request.md)
+* [HttpResponse](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/http-response.md)
+* [HttpRequest](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/http-request.md)
 
 ### Utilities
 
-* [ApiHelper](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/api-helper.md)
-* [HttpDateTime](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/http-date-time.md)
-* [RFC3339DateTime](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/rfc3339-date-time.md)
-* [UnixDateTime](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.0/doc/unix-date-time.md)
+* [ApiHelper](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/api-helper.md)
+* [HttpDateTime](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/http-date-time.md)
+* [RFC3339DateTime](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/rfc3339-date-time.md)
+* [UnixDateTime](https://www.github.com/WasifMatic/acme-python-sdk/tree/1.0.15/doc/unix-date-time.md)
 
