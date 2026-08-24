@@ -23,11 +23,11 @@ The package is compatible with Python versions `3.7+`.
 Install the package from PyPi using the following pip command:
 
 ```bash
-pip install cliV1==10.0.1
+pip install cliV1==10.0.2
 ```
 
 You can also view the package at:
-https://pypi.python.org/pypi/cliV1/10.0.1
+https://pypi.python.org/pypi/cliV1/10.0.2
 
 ## Initialize the API Client
 
