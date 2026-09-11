@@ -15,10 +15,10 @@ Represents the proxy server configurations for API calls.
 ## Usage Example
 
 ```python
-from paypalserversdk.paypal_serversdk_client import PaypalServersdkClient
-from paypalserversdk.http.proxy_settings import ProxySettings
+from apimaticcalculator.apimaticcalculator_client import ApimaticcalculatorClient
+from apimaticcalculator.http.proxy_settings import ProxySettings
 
-client = PaypalServersdkClient(
+client = ApimaticcalculatorClient(
     proxy_settings=ProxySettings(
         address='http://localhost',
         port=8888,
