@@ -15,10 +15,10 @@ Represents the proxy server configurations for API calls.
 ## Usage Example
 
 ```python
-from swaggerpetstoreopenapi30.swaggerpetstoreopenapi_30_client import Swaggerpetstoreopenapi30Client
-from swaggerpetstoreopenapi30.http.proxy_settings import ProxySettings
+from apimaticcalculator.apimaticcalculator_client import ApimaticcalculatorClient
+from apimaticcalculator.http.proxy_settings import ProxySettings
 
-client = Swaggerpetstoreopenapi30Client(
+client = ApimaticcalculatorClient(
     proxy_settings=ProxySettings(
         address='http://localhost',
         port=8888,
