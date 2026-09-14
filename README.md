@@ -1,13 +1,7 @@
-# Swagger Petstore - OpenAPI 3.0 SDK
 
-[![Built with APIMatic][apimatic-badge]][apimatic-url] [![License: MIT][license-badge]][license-url] [![Python 3.10+][python-badge]][python-url]
+# Getting Started with Swagger Petstore - OpenAPI 3.0
 
-The Swagger Petstore - OpenAPI 3.0 SDK for Python provides access to the [Swagger Petstore - OpenAPI 3.0 REST APIs](https://swagger.io) from Python applications.
-
-> [!TIP]
-> **Looking for a specific signature, model, enum, or error type?** This SDK ships a generated
-> **[SDK map](sdk-map.md)** -- a lookup index of the SDK's entire Python surface. Consult it before
-> scanning the source tree; details under [SDK map](#sdk-map).
+## Introduction
 
 This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
 Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
@@ -15,119 +9,142 @@ You can now help us improve the API whether it's by making changes to the defini
 That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
 
 Some useful links:
+
 - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
 - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
 
----
+Find out more about Swagger: [https://swagger.io](https://swagger.io)
 
-## Installation
+## Install the Package
 
-Install the Python SDK from PyPI, with whichever package manager your project uses:
-
-```bash
-pip install cliV1
-```
+The package is compatible with Python versions `3.7+`.
+Install the package from PyPi using the following pip command:
 
 ```bash
-uv add cliV1
+pip install cliV1==0.1.4
 ```
 
-```bash
-poetry add cliV1
-```
+You can also view the package at:
+https://pypi.python.org/pypi/cliV1/0.1.4
 
----
+## Initialize the API Client
 
-## Quick Start
+**_Note:_** Documentation for the client can be found [here.](doc/client.md)
 
-### Synchronous client
+The following parameters are configurable for the API Client:
 
-Construct `SwaggerPetstoreOpenApi30Client` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
+| Parameter | Type | Description |
+|  --- | --- | --- |
+| environment | [`Environment`](README.md#environments) | The API environment. <br> **Default: `Environment.PRODUCTION`** |
+| http_client_instance | `Union[Session, HttpClientProvider]` | The Http Client passed from the sdk user for making requests |
+| override_http_client_configuration | `bool` | The value which determines to override properties of the passed Http Client from the sdk user |
+| http_call_back | `HttpCallBack` | The callback value that is invoked before and after an HTTP call is made to an endpoint |
+| timeout | `float` | The value to use for connection timeout. <br> **Default: 30** |
+| max_retries | `int` | The number of times to retry an endpoint call if it fails. <br> **Default: 0** |
+| backoff_factor | `float` | A backoff factor to apply between attempts after the second try. <br> **Default: 2** |
+| retry_statuses | `Array of int` | The http statuses on which retry is to be done. <br> **Default: [408, 413, 429, 500, 502, 503, 504, 521, 522, 524, 408, 413, 429, 500, 502, 503, 504, 521, 522, 524]** |
+| retry_methods | `Array of string` | The http methods on which retry is to be done. <br> **Default: ["GET", "PUT", "GET", "PUT"]** |
+| proxy_settings | [`ProxySettings`](doc/proxy-settings.md) | Optional proxy configuration to route HTTP requests through a proxy server. |
+| logging_configuration | [`LoggingConfiguration`](doc/logging-configuration.md) | The SDK logging configuration for API calls |
+| petstore_auth_credentials | [`PetstoreAuthCredentials`](doc/auth/oauth-2-implicit-grant.md) | The credential object for OAuth 2 Implicit Grant |
+| api_key_credentials | [`ApiKeyCredentials`](doc/auth/custom-header-signature.md) | The credential object for Custom Header Signature |
+
+The API client can be initialized as follows:
+
+### Code-Based Client Initialization
 
 ```python
-from swagger_petstore_open_api_3_0 import SwaggerPetstoreOpenApi30Client
+import logging
 
-client = SwaggerPetstoreOpenApi30Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
+from swaggerpetstoreopenapi30.configuration import Environment
+from swaggerpetstoreopenapi30.http.auth.api_key import ApiKeyCredentials
+from swaggerpetstoreopenapi30.http.auth.petstore_auth import PetstoreAuthCredentials
+from swaggerpetstoreopenapi30.logging.configuration.api_logging_configuration import LoggingConfiguration
+from swaggerpetstoreopenapi30.logging.configuration.api_logging_configuration import RequestLoggingConfiguration
+from swaggerpetstoreopenapi30.logging.configuration.api_logging_configuration import ResponseLoggingConfiguration
+from swaggerpetstoreopenapi30.models.oauth_scope_petstore_auth import OauthScopePetstoreAuth
+from swaggerpetstoreopenapi30.swaggerpetstoreopenapi_30_client import Swaggerpetstoreopenapi30Client
 
-# TODO: call endpoints here -- see api-reference.md
-
-client.close()
+client = Swaggerpetstoreopenapi30Client(
+    petstore_auth_credentials=PetstoreAuthCredentials(
+        oauth_client_id='OAuthClientId',
+        oauth_redirect_uri='OAuthRedirectUri',
+        oauth_scopes=[
+            OauthScopePetstoreAuth.WRITEPETS,
+            OauthScopePetstoreAuth.READPETS
+        ]
+    ),
+    api_key_credentials=ApiKeyCredentials(
+        api_key='api_key'
+    ),
+    environment=Environment.PRODUCTION,
+    logging_configuration=LoggingConfiguration(
+        log_level=logging.INFO,
+        request_logging_config=RequestLoggingConfiguration(
+            log_body=True
+        ),
+        response_logging_config=ResponseLoggingConfiguration(
+            log_headers=True
+        )
+    )
+)
 ```
 
-Alternatively, scope it -- `with SwaggerPetstoreOpenApi30Client(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
-
-`Client` is exported as an alias of `SwaggerPetstoreOpenApi30Client`, so `from swagger_petstore_open_api_3_0 import Client` also works.
-
-The SDK accepts every model-typed input in two interchangeable spellings, both type-checked: the typed model, or a plain dict with the same keys -- the `OrDict` and `Model | ModelDict` unions in the [SDK map](sdk-map.md). Pick whichever suits the call site: the dict form needs no import, while the model form adds a keyword-checked constructor and editor completion.
-
-### Asynchronous client
-
-`AsyncSwaggerPetstoreOpenApi30Client` mirrors `SwaggerPetstoreOpenApi30Client` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
+### Environment-Based Client Initialization
 
 ```python
-from asyncio import run
+from swaggerpetstoreopenapi30.swaggerpetstoreopenapi_30_client import Swaggerpetstoreopenapi30Client
 
-from swagger_petstore_open_api_3_0 import AsyncSwaggerPetstoreOpenApi30Client
-
-
-async def main() -> None:
-    client = AsyncSwaggerPetstoreOpenApi30Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
-    # TODO: call endpoints here, awaiting each -- see api-reference.md
-    await client.aclose()
-
-
-run(main())
+# Specify the path to your .env file if it’s located outside the project’s root directory.
+client = Swaggerpetstoreopenapi30Client.from_environment(dotenv_path='/path/to/.env')
 ```
 
-Alternatively, scope it -- `async with AsyncSwaggerPetstoreOpenApi30Client(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx; see [Best Practices](#best-practices).
+See the [Environment-Based Client Initialization](doc/environment-based-client-initialization.md) section for details.
 
-`AsyncClient` is the exported alias. Each client accepts **only** its own transport argument; passing the other's is a `TypeError` at runtime and an error under mypy.
+## Environments
 
----
+The SDK can be configured to use a different environment for making API calls. Available environments are:
 
-## Usage
+### Fields
 
-Two generated references cover the SDK; each answers a different question:
+| Name | Description |
+|  --- | --- |
+| PRODUCTION | **Default** |
 
-| Reference | For |
-| --- | --- |
-| **[API Reference](api-reference.md)** | Usage guidance for a single **parsed** operation: `client.<group>.<operation>(...)` returns the typed payload and raises `ApiError` on any non-2xx, with `.error` the typed error body, or `RawError` for a status the operation does not document. |
-| **[Raw API Reference](raw-api-reference.md)** | The same for the **raw** variant: `client.<group>.with_raw_response.<operation>(...)` returns `ApiResult[T, E]` and never raises for an API error. |
+## Authorization
 
-Both API references carry every one of the 19 operations, with a sync and an async sample and a parameter table each.
+This API uses the following authentication schemes.
 
-## SDK map
+* [`petstore_auth (OAuth 2 Implicit Grant)`](doc/auth/oauth-2-implicit-grant.md)
+* [`api_key (Custom Header Signature)`](doc/auth/custom-header-signature.md)
 
-This SDK ships a generated **SDK map** -- [`sdk-map.md`](sdk-map.md) -- a deterministic, lookup-oriented table of contents of the SDK's Python surface, generated by APIMatic alongside this SDK.
+## List of APIs
 
-Consult the map before scanning or grepping the source: it answers call-level contract questions by lookup, and for anything it does not carry -- model shapes, enum values, an endpoint's route or behavioural prose -- it names the one source file to read. How to read the map itself, including the SDK-wide defaults its rows rely on, is stated at the top of [`sdk-map.md`](sdk-map.md).
+* [Pet](doc/controllers/pet.md)
+* [Store](doc/controllers/store.md)
+* [User](doc/controllers/user.md)
 
-## Best Practices
+## SDK Infrastructure
 
-> [!TIP]
-> Use a **single `SwaggerPetstoreOpenApi30Client` instance** for the lifetime of your application and reuse it across
-> all requests. Each instance owns its own connection pool, so an instance per request forfeits
-> connection reuse and leaks pools that are never closed.
+### Configuration
 
-Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with SwaggerPetstoreOpenApi30Client() as client:` / `async with AsyncSwaggerPetstoreOpenApi30Client() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
+* [ProxySettings](doc/proxy-settings.md)
+* [Environment-Based Client Initialization](doc/environment-based-client-initialization.md)
+* [AbstractLogger](doc/abstract-logger.md)
+* [LoggingConfiguration](doc/logging-configuration.md)
+* [RequestLoggingConfiguration](doc/request-logging-configuration.md)
+* [ResponseLoggingConfiguration](doc/response-logging-configuration.md)
 
-## License
+### HTTP
 
-This SDK is distributed under the [MIT License][license-url].
+* [HttpResponse](doc/http-response.md)
+* [HttpRequest](doc/http-request.md)
 
----
+### Utilities
 
-## Support
+* [ApiResponse](doc/api-response.md)
+* [ApiHelper](doc/api-helper.md)
+* [HttpDateTime](doc/http-date-time.md)
+* [RFC3339DateTime](doc/rfc3339-date-time.md)
+* [UnixDateTime](doc/unix-date-time.md)
 
-Refer to the [API reference](api-reference.md) for detailed information on available operations with code samples.
-
-For further assistance, please contact support at apiteam@swagger.io.
-
----
-
-[license-url]: LICENSE
-[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
-[apimatic-url]: https://www.apimatic.io
-[apimatic-badge]: https://www.apimatic.io/hubfs/Built-with-APIMatic-badge.svg
-[python-url]: https://www.python.org/downloads/
-[python-badge]: https://img.shields.io/badge/python-3.10%2B-blue.svg
