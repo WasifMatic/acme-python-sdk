@@ -8,7 +8,7 @@
 | --- | --- |
 | SDK display name | Swagger Petstore - OpenAPI 3.0 |
 | Root package | `swagger_petstore_open_api_3_0` |
-| Distribution name | `cliV1` |
+| Distribution name | `swagger-petstore-open-api-3-0` |
 | Requires | Python 3.10 or later |
 | API spec version | `1.0.26` |
 | Generator | APIMatic |
@@ -76,8 +76,8 @@ The types those columns name — where each imports from and, for a credentials 
 | Type | Import from | Shape |
 | --- | --- | --- |
 | `ServerConfigOrDict` | `swagger_petstore_open_api_3_0.server` | keys as the Servers & auth tables read |
-| `HttpClient` | `swagger_petstore_open_api_3_0.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()` |
-| `AsyncHttpClient` | `swagger_petstore_open_api_3_0.core` | protocol — `async send(request: HttpRequest) -> HttpResponse` · `async aclose()` |
+| `HttpClient` | `swagger_petstore_open_api_3_0.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()`; `send` returns once the head has arrived and never reads the body |
+| `AsyncHttpClient` | `swagger_petstore_open_api_3_0.core` | protocol — `async send(request: HttpRequest) -> AsyncHttpResponse` · `async aclose()`; the same obligation, awaited |
 
 ---
 
@@ -86,28 +86,26 @@ The types those columns name — where each imports from and, for a credentials 
 Every operation is reached in two response modes:
 
 - **Parsed call.** Returns the decoded payload and raises `ApiError` on an error status, with the decoded body on `.error` and the status on `.status_code`.
-- **Raw call.** Reached through `.with_raw_response`; returns `ApiResult` — `Success` or `Failure` — and never raises for an API error. Read `.payload` on a `Success` or `.error` on a `Failure`; both carry `.response`.
+- **Raw call.** Reached through `.with_raw_response`; returns `ApiResult` — `Success` or `Failure` — and never raises for an API error. Read `.payload` on a `Success` or `.error` on a `Failure`; both carry `.status_code` and `.headers`.
 
 What `.error` holds is fixed per operation. There are two cases:
 
 - **Case A — typed error.** The operation documents at least one error status, so `swagger_petstore_open_api_3_0/errors/` declares a union alias over the bodies those statuses map to — `RawError` is always its last arm, for any undocumented status — and `.error` is annotated with that alias. Narrow it with `isinstance`. The operation blocks name the alias and the status each arm maps from.
-- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`swagger_petstore_open_api_3_0/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse`.
+- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`swagger_petstore_open_api_3_0/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any`.
 
 Core runtime types (`swagger_petstore_open_api_3_0/core/`) — public members with their **declared types**, verbatim from source:
 
 | Type | Public members | Source |
 | --- | --- | --- |
-| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `swagger_petstore_open_api_3_0/errors/` or `RawError` | `error: E` · `status_code: int` · `response: HttpResponse` | `swagger_petstore_open_api_3_0/core/exceptions.py` |
-| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `response: HttpResponse` (on both) | `swagger_petstore_open_api_3_0/core/results.py` |
-| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` · `response: HttpResponse` | `swagger_petstore_open_api_3_0/core/results.py` |
+| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `swagger_petstore_open_api_3_0/errors/` or `RawError` | `error: E` · `status_code: int` · `headers: Mapping[str, str]` | `swagger_petstore_open_api_3_0/core/exceptions.py` |
+| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `status_code: int` · `headers: Mapping[str, str]` (both on either) | `swagger_petstore_open_api_3_0/core/results.py` |
+| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` | `swagger_petstore_open_api_3_0/core/results.py` |
 
 Typed error bodies (the arms of a Case A alias) are ordinary models — no special handling. The operation's **Type sources** table gives the module that declares each one; read field names, declared types and JSON aliases there, as for any other model.
 
 ```python
-from swagger_petstore_open_api_3_0.core import ApiError, RawError
-
 try:
-    response = client.pet_api.add_pet(name, photo_urls)
+    response = client.pet_api.add_pet("doggie", ["some example string"], id_=10)
 except ApiError as e:
     # Case A — typed error: e.error is AddPetErrorBody
     if isinstance(e.error, RawError):

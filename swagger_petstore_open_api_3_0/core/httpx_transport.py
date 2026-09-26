@@ -43,11 +43,10 @@ from .bodies import (
 from .files import AsyncBinaryContent, AsyncBinaryReader, BinaryReader
 from .transport import (
     AsyncHttpClient,
-    AsyncStreamedResponse,
+    AsyncHttpResponse,
     HttpClient,
     HttpRequest,
     HttpResponse,
-    StreamedResponse,
 )
 
 _DEFAULT_TIMEOUT = 30.0
@@ -581,14 +580,21 @@ def _timeout_kwargs(request: HttpRequest) -> dict[str, Any]:
 
 
 @dataclass(frozen=True, slots=True)
-class _HttpxStreamedResponse:
-    """A thin veneer meeting :class:`StreamedResponse` over the library's own response.
+class _HttpxResponse:
+    """A thin veneer meeting :class:`HttpResponse` over the library's own response.
 
     httpx lowercases header names on iteration, so ``headers`` meets the protocols' casing
     obligation by construction; ``read`` is the library's own, which both buffers the body and
     releases the connection -- the exact obligation the protocol states."""
 
     _response: httpx.Response
+
+    @property
+    def url(self) -> str:
+        # httpx answers this from the request it kept, and the SDK never sets follow_redirects, so
+        # it is the URL that was asked for. A property rather than a field: the generated dataclass
+        # repr would otherwise print a query string a credential can sit in (ADR-0017).
+        return str(self._response.url)
 
     @property
     def status_code(self) -> int:
@@ -598,7 +604,7 @@ class _HttpxStreamedResponse:
     def headers(self) -> Mapping[str, str]:
         return dict(self._response.headers)
 
-    def iter_bytes(self, chunk_size: int) -> Iterator[bytes]:
+    def iter_bytes(self, chunk_size: int | None) -> Iterator[bytes]:
         return self._response.iter_bytes(chunk_size)
 
     def read(self) -> bytes:
@@ -609,10 +615,17 @@ class _HttpxStreamedResponse:
 
 
 @dataclass(frozen=True, slots=True)
-class _AsyncHttpxStreamedResponse:
-    """The awaited twin of :class:`_HttpxStreamedResponse`, meeting :class:`AsyncStreamedResponse`."""
+class _AsyncHttpxResponse:
+    """The awaited twin of :class:`_HttpxResponse`, meeting :class:`AsyncHttpResponse`."""
 
     _response: httpx.Response
+
+    @property
+    def url(self) -> str:
+        # httpx answers this from the request it kept, and the SDK never sets follow_redirects, so
+        # it is the URL that was asked for. A property rather than a field: the generated dataclass
+        # repr would otherwise print a query string a credential can sit in (ADR-0017).
+        return str(self._response.url)
 
     @property
     def status_code(self) -> int:
@@ -622,7 +635,7 @@ class _AsyncHttpxStreamedResponse:
     def headers(self) -> Mapping[str, str]:
         return dict(self._response.headers)
 
-    def aiter_bytes(self, chunk_size: int) -> AsyncIterator[bytes]:
+    def aiter_bytes(self, chunk_size: int | None) -> AsyncIterator[bytes]:
         return self._response.aiter_bytes(chunk_size)
 
     async def aread(self) -> bytes:
@@ -635,7 +648,8 @@ class _AsyncHttpxStreamedResponse:
 class HttpxClient(HttpClient):
     """Sync transport backed by httpx.
 
-    Uses connection pooling via a single ``httpx.Client``, and returns buffered responses.
+    Uses connection pooling via a single ``httpx.Client``, and returns once the response head
+    has arrived; the body is read by whoever the raw client hands it to.
 
     Requests honour the standard proxy and TLS environment variables -- ``HTTP_PROXY`` /
     ``HTTPS_PROXY`` / ``ALL_PROXY`` / ``NO_PROXY`` (consulted only when ``proxy_url`` is unset) and
@@ -662,27 +676,10 @@ class HttpxClient(HttpClient):
         self._closed = False
 
     def send(self, request: HttpRequest) -> HttpResponse:
-        # The stack owns every handle opened for this body; a buffered send has fully consumed the
-        # body by the time the response returns, so closing on exit is correct -- and an exception
-        # mid-send closes on the unwind.
-        with ExitStack() as stack:
-            response = self._client.request(
-                method=request.method,
-                url=request.url,
-                **_timeout_kwargs(request),
-                **_body_kwargs(request.body, request.headers, stack, binary_content=_sync_content),
-            )
-
-        return HttpResponse(
-            status_code=response.status_code,
-            headers=dict(response.headers),
-            content=response.content,
-        )
-
-    def stream(self, request: HttpRequest) -> StreamedResponse:
-        # The stack closes once the head has arrived -- which is after the request body has been
-        # sent in full, so closing there is correct, not early. The *response* body is pending;
-        # the returned wrapper owns that connection until it is closed.
+        # The stack owns every handle opened for this body, and closes once the head has arrived --
+        # which is after the request body has been sent in full, so closing there is correct, not
+        # early. An exception mid-send closes it on the unwind. The *response* body is pending; the
+        # returned wrapper owns that connection until it is closed.
         with ExitStack() as stack:
             httpx_request = self._client.build_request(
                 method=request.method,
@@ -691,7 +688,7 @@ class HttpxClient(HttpClient):
                 **_body_kwargs(request.body, request.headers, stack, binary_content=_sync_content),
             )
             response = self._client.send(httpx_request, stream=True)
-        return _HttpxStreamedResponse(response)
+        return _HttpxResponse(response)
 
     def close(self) -> None:
         if self._closed:
@@ -703,7 +700,8 @@ class HttpxClient(HttpClient):
 class AsyncHttpxClient(AsyncHttpClient):
     """Async transport backed by httpx.
 
-    Uses connection pooling via a single ``httpx.AsyncClient``, and returns buffered responses.
+    Uses connection pooling via a single ``httpx.AsyncClient``, and returns once the response
+    head has arrived; the body is read by whoever the raw client hands it to.
 
     Requests honour the standard proxy and TLS environment variables -- ``HTTP_PROXY`` /
     ``HTTPS_PROXY`` / ``ALL_PROXY`` / ``NO_PROXY`` (consulted only when ``proxy_url`` is unset) and
@@ -729,26 +727,10 @@ class AsyncHttpxClient(AsyncHttpClient):
         )
         self._closed = False
 
-    async def send(self, request: HttpRequest) -> HttpResponse:
+    async def send(self, request: HttpRequest) -> AsyncHttpResponse:
         with ExitStack() as stack:
             # Inside the stack, necessarily: the pre-pass opens a spill file per async part, and
             # those unwind with everything else this send opened.
-            body = await _drained_parts(request.body, stack)
-            response = await self._client.request(
-                method=request.method,
-                url=request.url,
-                **_timeout_kwargs(request),
-                **_body_kwargs(body, request.headers, stack, binary_content=_async_content),
-            )
-
-        return HttpResponse(
-            status_code=response.status_code,
-            headers=dict(response.headers),
-            content=response.content,
-        )
-
-    async def stream(self, request: HttpRequest) -> AsyncStreamedResponse:
-        with ExitStack() as stack:
             body = await _drained_parts(request.body, stack)
             httpx_request = self._client.build_request(
                 method=request.method,
@@ -757,7 +739,7 @@ class AsyncHttpxClient(AsyncHttpClient):
                 **_body_kwargs(body, request.headers, stack, binary_content=_async_content),
             )
             response = await self._client.send(httpx_request, stream=True)
-        return _AsyncHttpxStreamedResponse(response)
+        return _AsyncHttpxResponse(response)
 
     async def aclose(self) -> None:
         if self._closed:

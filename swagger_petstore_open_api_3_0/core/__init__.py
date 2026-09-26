@@ -121,20 +121,27 @@ from .converters import (
     open_enum_validator,
 )
 from .decoding import (
-    AsyncStreamDecoder,
+    AsyncResponseDecoder,
     ErrorMapper,
     ResponseDecoder,
-    StreamDecoder,
+    async_empty_response,
     async_file_decoder,
+    async_json_decoder,
+    async_json_event_decoder,
+    async_text_decoder,
+    async_text_event_decoder,
     decode_json,
     decode_text,
     empty_response,
     file_decoder,
     json_decoder,
+    json_event_decoder,
     raw_error_response,
     text_decoder,
+    text_event_decoder,
 )
 from .discriminators import WireDiscriminator
+from .event_streams import AsyncEventStream, EventStream
 from .exceptions import ApiError
 from .file_responses import AsyncFileResponse, FileResponse
 from .files import (
@@ -161,11 +168,10 @@ from .runtime_env import OPERATING_SYSTEM, PYTHON_RUNTIME
 from .servers import validate_one_of
 from .transport import (
     AsyncHttpClient,
-    AsyncStreamedResponse,
+    AsyncHttpResponse,
     HttpClient,
     HttpRequest,
     HttpResponse,
-    StreamedResponse,
 )
 
 __all__ = [
@@ -180,6 +186,7 @@ __all__ = [
     "AsyncHttpClient",
     "HttpRequest",
     "HttpResponse",
+    "AsyncHttpResponse",
     "HttpxClient",
     "AsyncHttpxClient",
     # Request parameters and bodies
@@ -210,11 +217,11 @@ __all__ = [
     "NamedFile",
     "FileInput",
     "AsyncFileInput",
-    # Streamed responses
-    "StreamedResponse",
-    "AsyncStreamedResponse",
+    # Streamed payloads
     "FileResponse",
     "AsyncFileResponse",
+    "EventStream",
+    "AsyncEventStream",
     # Per-call request options
     "RequestOptions",
     "RequestOptionsDict",
@@ -282,17 +289,23 @@ __all__ = [
     "AsyncAuthorizationCodeTokenSource",
     # Response decoding and error mapping
     "ResponseDecoder",
+    "AsyncResponseDecoder",
     "ErrorMapper",
-    "StreamDecoder",
-    "AsyncStreamDecoder",
     "json_decoder",
+    "async_json_decoder",
     "text_decoder",
+    "async_text_decoder",
     "decode_json",
     "decode_text",
     "empty_response",
+    "async_empty_response",
     "raw_error_response",
     "file_decoder",
     "async_file_decoder",
+    "json_event_decoder",
+    "text_event_decoder",
+    "async_json_event_decoder",
+    "async_text_event_decoder",
     # Model base and optionality
     "SdkBaseModel",
     "UNSET",

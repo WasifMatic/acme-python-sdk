@@ -53,8 +53,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /store/order`
 - **Server**: `default`
-- **Signature**: `def place_order(*, id: int | None = None, pet_id: int | None = None, quantity: int | None = None, ship_date: RFC3339DateTime | None = None, status: OrderStatusOrStr | None = None, complete: bool | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `id` — form field · `pet_id` — form field `petId` · `quantity` — form field · `ship_date` — form field `shipDate` · `status` — form field · `complete` — form field
+- **Signature**: `def place_order(*, id_: int | None = None, pet_id: int | None = None, quantity: int | None = None, ship_date: RFC3339DateTime | None = None, status: OrderStatusOrStr | None = None, complete: bool | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `id_` — form field `id` · `pet_id` — form field `petId` · `quantity` — form field · `ship_date` — form field `shipDate` · `status` — form field · `complete` — form field
 - **Returns (parsed)**: `Order`
 - **Returns (raw)**: `ApiResult[Order, PlaceOrderErrorBody]`
 - **Error**: `PlaceOrderErrorBody` — **Case A (typed)**

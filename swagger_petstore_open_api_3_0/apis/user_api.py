@@ -9,6 +9,8 @@ from ..core import (
     RawClient,
     RawError,
     RequestOptionsOrDict,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     form_body,
     json_body,
@@ -31,7 +33,7 @@ class UserApi:
     def create_user(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -44,7 +46,7 @@ class UserApi:
         """This can only be done by the logged in user.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -60,7 +62,7 @@ class UserApi:
         Raises:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
         return self._with_raw_response.create_user(
-            id=id,
+            id_=id_,
             username=username,
             first_name=first_name,
             last_name=last_name,
@@ -155,7 +157,7 @@ class UserApi:
         self,
         usersname: str,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -169,7 +171,7 @@ class UserApi:
 
         Args:
             usersname: The username that needs to be processed
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -186,7 +188,7 @@ class UserApi:
             ApiError: bad request user not found ``error`` is ``RawError``."""
         return self._with_raw_response.update_user(
             usersname,
-            id=id,
+            id_=id_,
             username=username,
             first_name=first_name,
             last_name=last_name,
@@ -209,7 +211,7 @@ class AsyncUserApi:
     async def create_user(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -222,7 +224,7 @@ class AsyncUserApi:
         """This can only be done by the logged in user.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -239,7 +241,7 @@ class AsyncUserApi:
             ApiError: If the API responds with an error status code. ``error`` is ``RawError``."""
         return (
             await self._with_raw_response.create_user(
-                id=id,
+                id_=id_,
                 username=username,
                 first_name=first_name,
                 last_name=last_name,
@@ -339,7 +341,7 @@ class AsyncUserApi:
         self,
         usersname: str,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -353,7 +355,7 @@ class AsyncUserApi:
 
         Args:
             usersname: The username that needs to be processed
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -371,7 +373,7 @@ class AsyncUserApi:
         return (
             await self._with_raw_response.update_user(
                 usersname,
-                id=id,
+                id_=id_,
                 username=username,
                 first_name=first_name,
                 last_name=last_name,
@@ -392,7 +394,7 @@ class UserApiWithRawResponse(BaseRawResponse[RawClient, Server]):
     def create_user(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -405,7 +407,7 @@ class UserApiWithRawResponse(BaseRawResponse[RawClient, Server]):
         """This can only be done by the logged in user.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -422,7 +424,7 @@ class UserApiWithRawResponse(BaseRawResponse[RawClient, Server]):
             url_template=self._server.default("/user"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=form_body(
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[str | None]("username", username),
                 param[str | None]("firstName", first_name),
                 param[str | None]("lastName", last_name),
@@ -543,7 +545,7 @@ class UserApiWithRawResponse(BaseRawResponse[RawClient, Server]):
         self,
         usersname: str,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -557,7 +559,7 @@ class UserApiWithRawResponse(BaseRawResponse[RawClient, Server]):
 
         Args:
             usersname: The username that needs to be processed
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -575,7 +577,7 @@ class UserApiWithRawResponse(BaseRawResponse[RawClient, Server]):
             path_params=[param[str]("usersname", usersname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=form_body(
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[str | None]("username", username),
                 param[str | None]("firstName", first_name),
                 param[str | None]("lastName", last_name),
@@ -594,7 +596,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
     async def create_user(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -607,7 +609,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
         """This can only be done by the logged in user.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -624,7 +626,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
             url_template=self._server.default("/user"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=form_body(
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[str | None]("username", username),
                 param[str | None]("firstName", first_name),
                 param[str | None]("lastName", last_name),
@@ -633,7 +635,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
                 param[str | None]("phone", phone),
                 param[int | None]("userStatus", user_status),
             ),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -654,7 +656,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
             url_template=self._server.default("/user/createWithList"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=json_body[list[User | UserDict] | None](body),
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -675,7 +677,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
             url_template=self._server.default("/user/{usersname}"),
             path_params=[param[str]("usersname", usersname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_user_error_mapper,
             request_options=request_options,
         )
@@ -695,7 +697,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
             http_method="GET",
             url_template=self._server.default("/user/{usersname}"),
             path_params=[param[str]("usersname", usersname)],
-            decoder=json_decoder[User],
+            decoder=async_json_decoder[User],
             error_mapper=get_user_by_name_error_mapper,
             request_options=request_options,
         )
@@ -720,7 +722,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
             http_method="GET",
             url_template=self._server.default("/user/login"),
             query_params=[param[str | None]("username", username), param[str | None]("password", password)],
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=login_user_error_mapper,
             request_options=request_options,
         )
@@ -736,7 +738,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
         return await self._client.execute(
             http_method="GET",
             url_template=self._server.default("/user/logout"),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -745,7 +747,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
         self,
         usersname: str,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         username: str | None = None,
         first_name: str | None = None,
         last_name: str | None = None,
@@ -759,7 +761,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
 
         Args:
             usersname: The username that needs to be processed
-            id: Value sent with the request.
+            id_: Value sent with the request.
             username: Value sent with the request.
             first_name: Value sent with the request.
             last_name: Value sent with the request.
@@ -777,7 +779,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
             path_params=[param[str]("usersname", usersname)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=form_body(
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[str | None]("username", username),
                 param[str | None]("firstName", first_name),
                 param[str | None]("lastName", last_name),
@@ -786,7 +788,7 @@ class AsyncUserApiWithRawResponse(BaseRawResponse[AsyncRawClient, Server]):
                 param[str | None]("phone", phone),
                 param[int | None]("userStatus", user_status),
             ),
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=update_user_error_mapper,
             request_options=request_options,
         )

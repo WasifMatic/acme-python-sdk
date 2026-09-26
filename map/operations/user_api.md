@@ -10,8 +10,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `POST /user`
 - **Server**: `default`
-- **Signature**: `def create_user(*, id: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None)`
-- **Params**: `id` — form field · `username` — form field · `first_name` — form field `firstName` · `last_name` — form field `lastName` · `email` — form field · `password` — form field · `phone` — form field · `user_status` — form field `userStatus`
+- **Signature**: `def create_user(*, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Params**: `id_` — form field `id` · `username` — form field · `first_name` — form field `firstName` · `last_name` — form field `lastName` · `email` — form field · `password` — form field · `phone` — form field · `user_status` — form field `userStatus`
 - **Returns (parsed)**: `User`
 - **Returns (raw)**: `ApiResult[User, RawError]`
 - **Error**: `RawError` — **Case B**
@@ -96,9 +96,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /user/{usersname}`
 - **Server**: `default`
-- **Signature**: `def update_user(usersname: str, *, id: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def update_user(usersname: str, *, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `usersname`
-- **Params**: `usersname` — path · `id` — form field · `username` — form field · `first_name` — form field `firstName` · `last_name` — form field `lastName` · `email` — form field · `password` — form field · `phone` — form field · `user_status` — form field `userStatus`
+- **Params**: `usersname` — path · `id_` — form field `id` · `username` — form field · `first_name` — form field `firstName` · `last_name` — form field `lastName` · `email` — form field · `password` — form field · `phone` — form field · `user_status` — form field `userStatus`
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, UpdateUserErrorBody]`
 - **Error**: `UpdateUserErrorBody` — **Case A (typed)**

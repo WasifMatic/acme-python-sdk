@@ -22,18 +22,18 @@ Some useful links:
 
 ## Installation
 
-Install the Python SDK from PyPI, with whichever package manager your project uses:
+Add the Python SDK to your project from its folder, with whichever package manager your project uses. Give each tool a path containing a slash, such as `../swagger-petstore-open-api-3-0` — a bare folder name is looked up on PyPI instead, and resolves to whatever project holds that name there:
 
 ```bash
-pip install cliV1
+pip install <path-to-sdk>
 ```
 
 ```bash
-uv add cliV1
+uv add <path-to-sdk>
 ```
 
 ```bash
-poetry add cliV1
+poetry add <path-to-sdk>
 ```
 
 ---

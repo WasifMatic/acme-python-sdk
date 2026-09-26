@@ -9,7 +9,7 @@
 > Source: [PetApi](swagger_petstore_open_api_3_0/apis/pet_api.py)
 
 <details>
-<summary><code>def add_pet(name: str, photo_urls: list[str], *, id: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Pet, AddPetErrorBody]</code></summary>
+<summary><code>def add_pet(name: str, photo_urls: list[str], *, id_: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Pet, AddPetErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -32,7 +32,7 @@ Add a new pet to the store.
 **Sync**
 
 ```python
-result = client.pet_api.with_raw_response.add_pet(name, photo_urls)
+result = client.pet_api.with_raw_response.add_pet("doggie", ["some example string"], id_=10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -43,7 +43,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pet_api.with_raw_response.add_pet(name, photo_urls)
+result = await async_client.pet_api.with_raw_response.add_pet("doggie", ["some example string"], id_=10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -63,7 +63,7 @@ match result:
 | --- | --- | --- |
 | <code>name</code> | <code>str</code> | Value sent with the request. |
 | <code>photo_urls</code> | <code>list&#91;str&#93;</code> | Value sent with the request. |
-| <code>id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>category</code> | <code>[Category](swagger_petstore_open_api_3_0/models/category.py) \| [CategoryDict](swagger_petstore_open_api_3_0/models/category.py) \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>tags</code> | <code>list&#91;[TagModel](swagger_petstore_open_api_3_0/models/tag_model.py) \| [TagModelDict](swagger_petstore_open_api_3_0/models/tag_model.py)&#93; \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_0/models/enums/pet_status.py) \| None</code> | pet status in the store<br>**Default**: <code>None</code> |
@@ -122,7 +122,7 @@ Delete a pet.
 **Sync**
 
 ```python
-result = client.pet_api.with_raw_response.delete_pet(pet_id)
+result = client.pet_api.with_raw_response.delete_pet(10)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -133,7 +133,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pet_api.with_raw_response.delete_pet(pet_id)
+result = await async_client.pet_api.with_raw_response.delete_pet(10)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -378,7 +378,7 @@ Returns a single pet.
 **Sync**
 
 ```python
-result = client.pet_api.with_raw_response.get_pet_by_id(pet_id)
+result = client.pet_api.with_raw_response.get_pet_by_id(10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -389,7 +389,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pet_api.with_raw_response.get_pet_by_id(pet_id)
+result = await async_client.pet_api.with_raw_response.get_pet_by_id(10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -440,7 +440,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def update_pet(name: str, photo_urls: list[str], *, id: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Pet, UpdatePetErrorBody]</code></summary>
+<summary><code>def update_pet(name: str, photo_urls: list[str], *, id_: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Pet, UpdatePetErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -463,7 +463,7 @@ Update an existing pet by Id.
 **Sync**
 
 ```python
-result = client.pet_api.with_raw_response.update_pet(name, photo_urls)
+result = client.pet_api.with_raw_response.update_pet("doggie", ["some example string"], id_=10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -474,7 +474,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pet_api.with_raw_response.update_pet(name, photo_urls)
+result = await async_client.pet_api.with_raw_response.update_pet("doggie", ["some example string"], id_=10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -494,7 +494,7 @@ match result:
 | --- | --- | --- |
 | <code>name</code> | <code>str</code> | Value sent with the request. |
 | <code>photo_urls</code> | <code>list&#91;str&#93;</code> | Value sent with the request. |
-| <code>id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>category</code> | <code>[Category](swagger_petstore_open_api_3_0/models/category.py) \| [CategoryDict](swagger_petstore_open_api_3_0/models/category.py) \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>tags</code> | <code>list&#91;[TagModel](swagger_petstore_open_api_3_0/models/tag_model.py) \| [TagModelDict](swagger_petstore_open_api_3_0/models/tag_model.py)&#93; \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_0/models/enums/pet_status.py) \| None</code> | pet status in the store<br>**Default**: <code>None</code> |
@@ -553,7 +553,7 @@ Updates a pet resource based on the form data.
 **Sync**
 
 ```python
-result = client.pet_api.with_raw_response.update_pet_with_form(pet_id)
+result = client.pet_api.with_raw_response.update_pet_with_form(10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -564,7 +564,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pet_api.with_raw_response.update_pet_with_form(pet_id)
+result = await async_client.pet_api.with_raw_response.update_pet_with_form(10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Pet
@@ -640,7 +640,7 @@ Upload image of the pet.
 **Sync**
 
 ```python
-result = client.pet_api.with_raw_response.upload_file(pet_id)
+result = client.pet_api.with_raw_response.upload_file(10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ApiResponse
@@ -651,7 +651,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.pet_api.with_raw_response.upload_file(pet_id)
+result = await async_client.pet_api.with_raw_response.upload_file(10)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type ApiResponse
@@ -731,7 +731,7 @@ For valid response try integer IDs with value < 1000. Anything above 1000 or non
 **Sync**
 
 ```python
-result = client.store.with_raw_response.delete_order(order_id)
+result = client.store.with_raw_response.delete_order(1)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -742,7 +742,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.store.with_raw_response.delete_order(order_id)
+result = await async_client.store.with_raw_response.delete_order(1)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -893,7 +893,7 @@ For valid response try integer IDs with value <= 5 or > 10. Other values will ge
 **Sync**
 
 ```python
-result = client.store.with_raw_response.get_order_by_id(order_id)
+result = client.store.with_raw_response.get_order_by_id(1)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Order
@@ -904,7 +904,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.store.with_raw_response.get_order_by_id(order_id)
+result = await async_client.store.with_raw_response.get_order_by_id(1)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Order
@@ -955,7 +955,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def place_order(*, id: int | None = None, pet_id: int | None = None, quantity: int | None = None, ship_date: RFC3339DateTime | None = None, status: OrderStatusOrStr | None = None, complete: bool | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Order, PlaceOrderErrorBody]</code></summary>
+<summary><code>def place_order(*, id_: int | None = None, pet_id: int | None = None, quantity: int | None = None, ship_date: RFC3339DateTime | None = None, status: OrderStatusOrStr | None = None, complete: bool | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Order, PlaceOrderErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -978,7 +978,7 @@ Place a new order in the store.
 **Sync**
 
 ```python
-result = client.store.with_raw_response.place_order()
+result = client.store.with_raw_response.place_order(id_=10, pet_id=198772, quantity=7)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Order
@@ -989,7 +989,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.store.with_raw_response.place_order()
+result = await async_client.store.with_raw_response.place_order(id_=10, pet_id=198772, quantity=7)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type Order
@@ -1007,7 +1007,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>pet_id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>quantity</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>ship_date</code> | <code>RFC3339DateTime \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
@@ -1049,7 +1049,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 > Source: [UserApi](swagger_petstore_open_api_3_0/apis/user_api.py)
 
 <details>
-<summary><code>def create_user(*, id: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[User, RawError]</code></summary>
+<summary><code>def create_user(*, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[User, RawError]</code></summary>
 
 <dl>
 <dd>
@@ -1072,7 +1072,16 @@ This can only be done by the logged in user.
 **Sync**
 
 ```python
-result = client.user_api.with_raw_response.create_user()
+result = client.user_api.with_raw_response.create_user(
+    id_=10,
+    username="theUser",
+    first_name="John",
+    last_name="James",
+    email="john@email.com",
+    password="12345",
+    phone="12345",
+    user_status=1,
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type User
@@ -1083,7 +1092,16 @@ match result:
 **Async**
 
 ```python
-result = await async_client.user_api.with_raw_response.create_user()
+result = await async_client.user_api.with_raw_response.create_user(
+    id_=10,
+    username="theUser",
+    first_name="John",
+    last_name="James",
+    email="john@email.com",
+    password="12345",
+    phone="12345",
+    user_status=1,
+)
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type User
@@ -1101,7 +1119,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>username</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>first_name</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>last_name</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
@@ -1235,7 +1253,7 @@ This can only be done by the logged in user.
 **Sync**
 
 ```python
-result = client.user_api.with_raw_response.delete_user(usersname)
+result = client.user_api.with_raw_response.delete_user("some example string")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -1246,7 +1264,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.user_api.with_raw_response.delete_user(usersname)
+result = await async_client.user_api.with_raw_response.delete_user("some example string")
 match result:
     case Success():
         ...  # 2xx, no content
@@ -1320,7 +1338,7 @@ Get user detail based on username.
 **Sync**
 
 ```python
-result = client.user_api.with_raw_response.get_user_by_name(usersname)
+result = client.user_api.with_raw_response.get_user_by_name("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type User
@@ -1331,7 +1349,7 @@ match result:
 **Async**
 
 ```python
-result = await async_client.user_api.with_raw_response.get_user_by_name(usersname)
+result = await async_client.user_api.with_raw_response.get_user_by_name("some example string")
 match result:
     case Success(payload=payload):
         ...  # TODO: Handle 'payload' of type User
@@ -1545,7 +1563,7 @@ match result:
 </details>
 
 <details>
-<summary><code>def update_user(usersname: str, *, id: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, UpdateUserErrorBody]</code></summary>
+<summary><code>def update_user(usersname: str, *, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, UpdateUserErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -1568,7 +1586,17 @@ This can only be done by the logged in user.
 **Sync**
 
 ```python
-result = client.user_api.with_raw_response.update_user(usersname)
+result = client.user_api.with_raw_response.update_user(
+    "some example string",
+    id_=10,
+    username="theUser",
+    first_name="John",
+    last_name="James",
+    email="john@email.com",
+    password="12345",
+    phone="12345",
+    user_status=1,
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -1579,7 +1607,17 @@ match result:
 **Async**
 
 ```python
-result = await async_client.user_api.with_raw_response.update_user(usersname)
+result = await async_client.user_api.with_raw_response.update_user(
+    "some example string",
+    id_=10,
+    username="theUser",
+    first_name="John",
+    last_name="James",
+    email="john@email.com",
+    password="12345",
+    phone="12345",
+    user_status=1,
+)
 match result:
     case Success():
         ...  # 2xx, no content
@@ -1598,7 +1636,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>usersname</code> | <code>str</code> | The username that needs to be processed |
-| <code>id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>username</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>first_name</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>last_name</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |

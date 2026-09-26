@@ -11,9 +11,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `POST /pet`
 - **Auth**: `petstore_auth`
 - **Server**: `default`
-- **Signature**: `def add_pet(name: str, photo_urls: list[str], *, id: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def add_pet(name: str, photo_urls: list[str], *, id_: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `name`, `photo_urls`
-- **Params**: `name` — form field · `photo_urls` — form field `photoUrls` · `id` — form field · `category` — form field · `tags` — form field · `status` — form field
+- **Params**: `name` — form field · `photo_urls` — form field `photoUrls` · `id_` — form field `id` · `category` — form field · `tags` — form field · `status` — form field
 - **Returns (parsed)**: `Pet`
 - **Returns (raw)**: `ApiResult[Pet, AddPetErrorBody]`
 - **Error**: `AddPetErrorBody` — **Case A (typed)**
@@ -104,9 +104,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 - **Route**: `PUT /pet`
 - **Auth**: `petstore_auth`
 - **Server**: `default`
-- **Signature**: `def update_pet(name: str, photo_urls: list[str], *, id: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
+- **Signature**: `def update_pet(name: str, photo_urls: list[str], *, id_: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None)`
   - required, positional: `name`, `photo_urls`
-- **Params**: `name` — form field · `photo_urls` — form field `photoUrls` · `id` — form field · `category` — form field · `tags` — form field · `status` — form field
+- **Params**: `name` — form field · `photo_urls` — form field `photoUrls` · `id_` — form field `id` · `category` — form field · `tags` — form field · `status` — form field
 - **Returns (parsed)**: `Pet`
 - **Returns (raw)**: `ApiResult[Pet, UpdatePetErrorBody]`
 - **Error**: `UpdatePetErrorBody` — **Case A (typed)**

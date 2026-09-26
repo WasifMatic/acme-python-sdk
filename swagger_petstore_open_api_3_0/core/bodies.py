@@ -16,12 +16,13 @@ import codecs
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Final, Generic, TypeAlias, TypeVar, overload
+from typing import Any, Final, Generic, TypeAlias, TypeVar, overload
 
 from pydantic import TypeAdapter
 from typing_extensions import TypeForm, assert_never
 
 from ._internal.flattening import flatten, to_fields
+from ._internal.subscripts import SubscriptOnly
 from ._internal.wire import compact_json, to_text
 from .adapters import adapter_for, validation_target
 from .files import AsyncBinaryContent, AsyncFileInput, NamedFile
@@ -202,7 +203,7 @@ class _DeclaredJsonBody(Generic[T]):
         return JsonBody(_json_value(self.adapter, value), media_type)
 
 
-class _JsonBodyFactory:
+class _JsonBodyFactory(SubscriptOnly):
     """``json_body[T](value)`` -- name the body's declared type in the subscript.
 
     **A subscript and then a call, and the split is the whole point.** ``T`` is solved from the
@@ -216,7 +217,8 @@ class _JsonBodyFactory:
 
     The factory declares no ``__call__``, so *omitting* the declared type is a build failure too:
     ``json_body(employee)`` is rejected statically (``[operator]``) -- the guarantee the curried
-    signature used to carry. The runtime ``__call__`` below is invisible to type checkers and
+    signature used to carry. The runtime ``__call__`` inherited from :class:`SubscriptOnly` is
+    invisible to type checkers and
     exists only to turn that same mistake into a guided ``TypeError``.
 
     The subscript is a ``TypeForm``, exactly as in ``json_decoder[...]``, so a runtime union alias
@@ -241,16 +243,11 @@ class _JsonBodyFactory:
     its own label, only the endpoint knows which, and the transport carries whichever the body holds
     (ADR-0048)."""
 
+    factory_name = "json_body"
+    spelling = "json_body[T](value), e.g. json_body[Employee | EmployeeDict](model)"
+
     def __getitem__(self, declared: TypeForm[T]) -> _DeclaredJsonBody[T]:
         return _DeclaredJsonBody(adapter_for(validation_target(declared)))
-
-    if not TYPE_CHECKING:
-
-        def __call__(self, *args, **kwargs):
-            raise TypeError(
-                "json_body is not called directly -- name the declared type in its subscript: "
-                "json_body[T](value), e.g. json_body[Employee | EmployeeDict](model)"
-            )
 
 
 json_body: Final = _JsonBodyFactory()
@@ -428,7 +425,7 @@ class _DeclaredJsonPart(Generic[T]):
         return MultipartText(name, compact_json(_json_value(self.adapter, value)), media_type)
 
 
-class _JsonPartFactory:
+class _JsonPartFactory(SubscriptOnly):
     """``json_part[T](name, value)`` -- a multipart part whose body is JSON, not a form field.
 
     Subscripted for the reason ``json_body`` documents: ``T`` is solved from the subscript alone,
@@ -441,16 +438,11 @@ class _JsonPartFactory:
     says otherwise (ADR-0048). Declaring it is what makes a map-as-JSON-part and a
     map-as-form-fields two different factories rather than one factory and a flag."""
 
+    factory_name = "json_part"
+    spelling = 'json_part[T](name, value), e.g. json_part[FileMetadata | FileMetadataDict]("metadata", metadata)'
+
     def __getitem__(self, declared: TypeForm[T]) -> _DeclaredJsonPart[T]:
         return _DeclaredJsonPart(adapter_for(validation_target(declared)))
-
-    if not TYPE_CHECKING:
-
-        def __call__(self, *args, **kwargs):
-            raise TypeError(
-                "json_part is not called directly -- name the declared type in its subscript: "
-                'json_part[T](name, value), e.g. json_part[FileMetadata | FileMetadataDict]("metadata", metadata)'
-            )
 
 
 json_part: Final = _JsonPartFactory()
@@ -531,7 +523,7 @@ class _DeclaredTextBody(Generic[T]):
         return TextBody(dumped if isinstance(dumped, str) else to_text(dumped), media_type, charset)
 
 
-class _TextBodyFactory:
+class _TextBodyFactory(SubscriptOnly):
     """``text_body[T](value)`` -- a text body whose *type* picks the wire text and whose *charset*
     picks the bytes.
 
@@ -548,16 +540,11 @@ class _TextBodyFactory:
     where the spec differs from the default (``text/plain``, ``utf-8``), the rule ``param``'s
     ``serialization_format`` set."""
 
+    factory_name = "text_body"
+    spelling = "text_body[T](value), e.g. text_body[Base64AsciiEncodedBytes](data)"
+
     def __getitem__(self, declared: TypeForm[T]) -> _DeclaredTextBody[T]:
         return _DeclaredTextBody(adapter_for(validation_target(declared)))
-
-    if not TYPE_CHECKING:
-
-        def __call__(self, *args, **kwargs):
-            raise TypeError(
-                "text_body is not called directly -- name the declared type in its subscript: "
-                "text_body[T](value), e.g. text_body[Base64AsciiEncodedBytes](data)"
-            )
 
 
 text_body: Final = _TextBodyFactory()

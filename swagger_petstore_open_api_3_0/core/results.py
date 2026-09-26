@@ -13,16 +13,24 @@ with ``match`` or ``isinstance`` and the payload or error comes with it:
 Both variants are frozen dataclasses, so pattern matching needs nothing added. ``.unwrap()`` is the
 shortcut for callers that would rather not branch -- it returns the payload or raises.
 
+Each carries the response's **head** -- its status and headers -- as fields of its own rather than a
+response object. There is no body beside them: the body *is* the payload on a success, and on a
+failure it is the error, reachable through :class:`RawError` where the operation documents no schema
+for it. A no-content operation therefore cannot show a caller the body it discarded; reaching one
+deliberately is future work, and an empty ``content`` on a response object was the wrong way to
+advertise its absence.
+
 :class:`RawError` lives here too: it is the error type a :class:`Failure` carries when the operation
 does not document the status that came back."""
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from collections.abc import Mapping
+from dataclasses import dataclass, field
 from typing import Any, Generic, NoReturn, TypeAlias, TypeVar
 
+from ._internal.wire import parse_json
 from .exceptions import ApiError
-from .transport import HttpResponse
 
 T = TypeVar("T")
 E = TypeVar("E")
@@ -33,7 +41,13 @@ class Success(Generic[T]):
     """A successful (2xx) API call carrying the decoded ``payload``."""
 
     payload: T
-    response: HttpResponse
+    status_code: int
+    headers: Mapping[str, str] = field(repr=False)
+    """Header names lowercased, per the transports' obligation -- look keys up in lowercase.
+
+    Kept out of the generated repr: a response's headers carry ``set-cookie``, so a result printed
+    in a log line or a debugger pane would otherwise hand over a session secret. The status stays,
+    because identifying the result is the whole job of the string form (ADR-0017)."""
 
     def unwrap(self) -> T:
         """Collapse this result to its parsed value.
@@ -51,14 +65,20 @@ class Failure(Generic[E]):
     documented schemas, or :class:`RawError` for an unmapped status) -- not a wrapper."""
 
     error: E
-    response: HttpResponse
+    status_code: int
+    headers: Mapping[str, str] = field(repr=False)
+    """Header names lowercased, per the transports' obligation -- look keys up in lowercase.
+
+    Kept out of the generated repr: a response's headers carry ``set-cookie``, so a result printed
+    in a log line or a debugger pane would otherwise hand over a session secret. The status stays,
+    because identifying the result is the whole job of the string form (ADR-0017)."""
 
     def unwrap(self) -> NoReturn:
         """Collapse this result to its parsed value, which for a failure means raising.
 
         Raises:
-            ApiError: Always, carrying this result's ``error`` and ``response``."""
-        raise ApiError(error=self.error, response=self.response)
+            ApiError: Always, carrying this result's ``error`` and the response head."""
+        raise ApiError(error=self.error, status_code=self.status_code, headers=self.headers)
 
 
 # One call yields exactly one of these; narrow with ``match`` or ``isinstance``,
@@ -70,18 +90,12 @@ ApiResult: TypeAlias = Success[T] | Failure[E]
 class RawError:
     """Undecoded fallback body (unmapped status / no declared schema).
 
-    Wraps the raw response so the status and bytes are available and decoded on
-    demand. Constructed directly -- ``RawError(response)``."""
+    Holds the status and the bytes themselves rather than a response, so the one object that *is*
+    the error carries everything it needs to describe itself. Decoded on demand --
+    ``RawError(status_code, content)``."""
 
-    response: HttpResponse
-
-    @property
-    def status_code(self) -> int:
-        return self.response.status_code
-
-    @property
-    def content(self) -> bytes:
-        return self.response.content
+    status_code: int
+    content: bytes
 
     def text(self, encoding: str = "utf-8") -> str:
         """Decode the undecoded body as text, for a log line or a diagnostic.
@@ -91,7 +105,7 @@ class RawError:
 
         Returns:
             The body as text, undecodable bytes replaced rather than raising."""
-        return self.response.text(encoding)
+        return self.content.decode(encoding, errors="replace")
 
     def json(self) -> Any:
         """Parse the undecoded body as JSON.
@@ -101,10 +115,9 @@ class RawError:
 
         Raises:
             ValueError: If the body is not valid JSON."""
-        return self.response.json()
+        return parse_json(self.content)
 
     def __repr__(self) -> str:
-        # Identify the response by status only -- the (undecoded, possibly large,
-        # binary, or sensitive) body and the headers/request are deliberately kept
-        # out of the string form. Read the body on demand via ``text``/``json``.
+        # Identify by status only -- the (undecoded, possibly large, binary, or sensitive) body is
+        # deliberately kept out of the string form. Read it on demand via ``text``/``json``.
         return f"{type(self).__name__}(status_code={self.status_code})"

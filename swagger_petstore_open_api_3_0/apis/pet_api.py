@@ -13,6 +13,8 @@ from ..core import (
     RawClient,
     RequestOptionsOrDict,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     binary_body,
     empty_response,
     form_body,
@@ -44,7 +46,7 @@ class PetApi:
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -55,7 +57,7 @@ class PetApi:
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -67,7 +69,7 @@ class PetApi:
         Raises:
             ApiError: Invalid input Validation exception ``error`` is ``RawError``."""
         return self._with_raw_response.add_pet(
-            name, photo_urls, id=id, category=category, tags=tags, status=status, request_options=request_options
+            name, photo_urls, id_=id_, category=category, tags=tags, status=status, request_options=request_options
         ).unwrap()
 
     def delete_pet(
@@ -138,7 +140,7 @@ class PetApi:
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -149,7 +151,7 @@ class PetApi:
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -161,7 +163,7 @@ class PetApi:
         Raises:
             ApiError: Invalid ID supplied Pet not found Validation exception ``error`` is ``RawError``."""
         return self._with_raw_response.update_pet(
-            name, photo_urls, id=id, category=category, tags=tags, status=status, request_options=request_options
+            name, photo_urls, id_=id_, category=category, tags=tags, status=status, request_options=request_options
         ).unwrap()
 
     def update_pet_with_form(
@@ -228,7 +230,7 @@ class AsyncPetApi:
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -239,7 +241,7 @@ class AsyncPetApi:
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -252,7 +254,7 @@ class AsyncPetApi:
             ApiError: Invalid input Validation exception ``error`` is ``RawError``."""
         return (
             await self._with_raw_response.add_pet(
-                name, photo_urls, id=id, category=category, tags=tags, status=status, request_options=request_options
+                name, photo_urls, id_=id_, category=category, tags=tags, status=status, request_options=request_options
             )
         ).unwrap()
 
@@ -328,7 +330,7 @@ class AsyncPetApi:
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -339,7 +341,7 @@ class AsyncPetApi:
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -352,7 +354,7 @@ class AsyncPetApi:
             ApiError: Invalid ID supplied Pet not found Validation exception ``error`` is ``RawError``."""
         return (
             await self._with_raw_response.update_pet(
-                name, photo_urls, id=id, category=category, tags=tags, status=status, request_options=request_options
+                name, photo_urls, id_=id_, category=category, tags=tags, status=status, request_options=request_options
             )
         ).unwrap()
 
@@ -421,7 +423,7 @@ class PetApiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -432,7 +434,7 @@ class PetApiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -447,7 +449,7 @@ class PetApiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
             body=form_body(
                 param[str]("name", name),
                 param[list[str]]("photoUrls", photo_urls),
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[Category | CategoryDict | None]("category", category),
                 param[list[TagModel | TagModelDict] | None]("tags", tags),
                 param[PetStatusOrStr | None]("status", status),
@@ -549,7 +551,7 @@ class PetApiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -560,7 +562,7 @@ class PetApiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -575,7 +577,7 @@ class PetApiWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
             body=form_body(
                 param[str]("name", name),
                 param[list[str]]("photoUrls", photo_urls),
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[Category | CategoryDict | None]("category", category),
                 param[list[TagModel | TagModelDict] | None]("tags", tags),
                 param[PetStatusOrStr | None]("status", status),
@@ -654,7 +656,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -665,7 +667,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -680,13 +682,13 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             body=form_body(
                 param[str]("name", name),
                 param[list[str]]("photoUrls", photo_urls),
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[Category | CategoryDict | None]("category", category),
                 param[list[TagModel | TagModelDict] | None]("tags", tags),
                 param[PetStatusOrStr | None]("status", status),
             ),
             auth_scheme=self._auth.petstore_auth,
-            decoder=json_decoder[Pet],
+            decoder=async_json_decoder[Pet],
             error_mapper=add_pet_error_mapper,
             request_options=request_options,
         )
@@ -709,7 +711,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             path_params=[param[int]("petId", pet_id)],
             headers=[param[str | None]("api_key", api_key), param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=self._auth.petstore_auth,
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_pet_error_mapper,
             request_options=request_options,
         )
@@ -730,7 +732,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             url_template=self._server.default("/pet/findByStatus"),
             query_params=[param[PetStatusOrStr | None]("status", status)],
             auth_scheme=self._auth.petstore_auth,
-            decoder=json_decoder[list[Pet]],
+            decoder=async_json_decoder[list[Pet]],
             error_mapper=find_pets_by_status_error_mapper,
             request_options=request_options,
         )
@@ -751,7 +753,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             url_template=self._server.default("/pet/findByTags"),
             query_params=[param[list[str] | None]("tags", tags)],
             auth_scheme=self._auth.petstore_auth,
-            decoder=json_decoder[list[Pet]],
+            decoder=async_json_decoder[list[Pet]],
             error_mapper=find_pets_by_tags_error_mapper,
             request_options=request_options,
         )
@@ -772,7 +774,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             url_template=self._server.default("/pet/{petId}"),
             path_params=[param[int]("petId", pet_id)],
             auth_scheme=AsyncAnySchemes(self._auth.api_key, self._auth.petstore_auth),
-            decoder=json_decoder[Pet],
+            decoder=async_json_decoder[Pet],
             error_mapper=get_pet_by_id_error_mapper,
             request_options=request_options,
         )
@@ -782,7 +784,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
         name: str,
         photo_urls: list[str],
         *,
-        id: int | None = None,
+        id_: int | None = None,
         category: Category | CategoryDict | None = None,
         tags: list[TagModel | TagModelDict] | None = None,
         status: PetStatusOrStr | None = None,
@@ -793,7 +795,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
         Args:
             name: Value sent with the request.
             photo_urls: Value sent with the request.
-            id: Value sent with the request.
+            id_: Value sent with the request.
             category: Value sent with the request.
             tags: Value sent with the request.
             status: pet status in the store
@@ -808,13 +810,13 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             body=form_body(
                 param[str]("name", name),
                 param[list[str]]("photoUrls", photo_urls),
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[Category | CategoryDict | None]("category", category),
                 param[list[TagModel | TagModelDict] | None]("tags", tags),
                 param[PetStatusOrStr | None]("status", status),
             ),
             auth_scheme=self._auth.petstore_auth,
-            decoder=json_decoder[Pet],
+            decoder=async_json_decoder[Pet],
             error_mapper=update_pet_error_mapper,
             request_options=request_options,
         )
@@ -844,7 +846,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             query_params=[param[str | None]("name", name), param[str | None]("status", status)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             auth_scheme=self._auth.petstore_auth,
-            decoder=json_decoder[Pet],
+            decoder=async_json_decoder[Pet],
             error_mapper=update_pet_with_form_error_mapper,
             request_options=request_options,
         )
@@ -875,7 +877,7 @@ class AsyncPetApiWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Asyn
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=binary_body(body),
             auth_scheme=self._auth.petstore_auth,
-            decoder=json_decoder[ApiResponse],
+            decoder=async_json_decoder[ApiResponse],
             error_mapper=upload_file_error_mapper,
             request_options=request_options,
         )

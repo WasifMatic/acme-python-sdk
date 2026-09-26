@@ -11,6 +11,8 @@ from ..core import (
     RequestOptionsOrDict,
     RFC3339DateTime,
     SecuredRawResponse,
+    async_empty_response,
+    async_json_decoder,
     empty_response,
     form_body,
     json_decoder,
@@ -74,7 +76,7 @@ class Store:
     def place_order(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         pet_id: int | None = None,
         quantity: int | None = None,
         ship_date: RFC3339DateTime | None = None,
@@ -85,7 +87,7 @@ class Store:
         """Place a new order in the store.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             pet_id: Value sent with the request.
             quantity: Value sent with the request.
             ship_date: Value sent with the request.
@@ -99,7 +101,7 @@ class Store:
         Raises:
             ApiError: Invalid input Validation exception ``error`` is ``RawError``."""
         return self._with_raw_response.place_order(
-            id=id,
+            id_=id_,
             pet_id=pet_id,
             quantity=quantity,
             ship_date=ship_date,
@@ -162,7 +164,7 @@ class AsyncStore:
     async def place_order(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         pet_id: int | None = None,
         quantity: int | None = None,
         ship_date: RFC3339DateTime | None = None,
@@ -173,7 +175,7 @@ class AsyncStore:
         """Place a new order in the store.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             pet_id: Value sent with the request.
             quantity: Value sent with the request.
             ship_date: Value sent with the request.
@@ -188,7 +190,7 @@ class AsyncStore:
             ApiError: Invalid input Validation exception ``error`` is ``RawError``."""
         return (
             await self._with_raw_response.place_order(
-                id=id,
+                id_=id_,
                 pet_id=pet_id,
                 quantity=quantity,
                 ship_date=ship_date,
@@ -268,7 +270,7 @@ class StoreWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
     def place_order(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         pet_id: int | None = None,
         quantity: int | None = None,
         ship_date: RFC3339DateTime | None = None,
@@ -279,7 +281,7 @@ class StoreWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
         """Place a new order in the store.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             pet_id: Value sent with the request.
             quantity: Value sent with the request.
             ship_date: Value sent with the request.
@@ -294,7 +296,7 @@ class StoreWithRawResponse(SecuredRawResponse[RawClient, Server, AuthSchemes]):
             url_template=self._server.default("/store/order"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=form_body(
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[int | None]("petId", pet_id),
                 param[int | None]("quantity", quantity),
                 param[RFC3339DateTime | None]("shipDate", ship_date),
@@ -325,7 +327,7 @@ class AsyncStoreWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Async
             url_template=self._server.default("/store/order/{orderId}"),
             path_params=[param[int]("orderId", order_id)],
             headers=[param[UUID]("Idempotency-Key", uuid4())],
-            decoder=empty_response,
+            decoder=async_empty_response,
             error_mapper=delete_order_error_mapper,
             request_options=request_options,
         )
@@ -344,7 +346,7 @@ class AsyncStoreWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Async
             http_method="GET",
             url_template=self._server.default("/store/inventory"),
             auth_scheme=self._auth.api_key,
-            decoder=json_decoder[dict[str, int]],
+            decoder=async_json_decoder[dict[str, int]],
             error_mapper=raw_error_response,
             request_options=request_options,
         )
@@ -364,7 +366,7 @@ class AsyncStoreWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Async
             http_method="GET",
             url_template=self._server.default("/store/order/{orderId}"),
             path_params=[param[int]("orderId", order_id)],
-            decoder=json_decoder[Order],
+            decoder=async_json_decoder[Order],
             error_mapper=get_order_by_id_error_mapper,
             request_options=request_options,
         )
@@ -372,7 +374,7 @@ class AsyncStoreWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Async
     async def place_order(
         self,
         *,
-        id: int | None = None,
+        id_: int | None = None,
         pet_id: int | None = None,
         quantity: int | None = None,
         ship_date: RFC3339DateTime | None = None,
@@ -383,7 +385,7 @@ class AsyncStoreWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Async
         """Place a new order in the store.
 
         Args:
-            id: Value sent with the request.
+            id_: Value sent with the request.
             pet_id: Value sent with the request.
             quantity: Value sent with the request.
             ship_date: Value sent with the request.
@@ -398,14 +400,14 @@ class AsyncStoreWithRawResponse(SecuredRawResponse[AsyncRawClient, Server, Async
             url_template=self._server.default("/store/order"),
             headers=[param[UUID]("Idempotency-Key", uuid4())],
             body=form_body(
-                param[int | None]("id", id),
+                param[int | None]("id", id_),
                 param[int | None]("petId", pet_id),
                 param[int | None]("quantity", quantity),
                 param[RFC3339DateTime | None]("shipDate", ship_date),
                 param[OrderStatusOrStr | None]("status", status),
                 param[bool | None]("complete", complete),
             ),
-            decoder=json_decoder[Order],
+            decoder=async_json_decoder[Order],
             error_mapper=place_order_error_mapper,
             request_options=request_options,
         )

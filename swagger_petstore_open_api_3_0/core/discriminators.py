@@ -46,10 +46,11 @@ class WireDiscriminator:
         property_name: The wire key the tag is read from and written to -- the spec's
             ``discriminator.propertyName`` in its wire spelling, not a Python field name, because the
             tag is read before any variant's alias machinery runs.
-        companion_key: The substitute key the dict companions declare, given only where
-            ``property_name`` cannot be written as an annotation -- a Python keyword, or a string
-            that is no identifier at all. Read alongside ``property_name``; never written on dump,
-            since only the wire spelling belongs on the wire."""
+        companion_key: The key the dict companions declare the tag under, given wherever it differs
+            from ``property_name`` and some variant needs the union to declare it -- the member
+            spelling of the wire key, sanitized where that key is a Python keyword or no identifier
+            at all. Read alongside ``property_name``; never written on dump, since only the wire
+            spelling belongs on the wire."""
 
     property_name: str
     companion_key: str | None = None
