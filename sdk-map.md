@@ -8,7 +8,7 @@
 | --- | --- |
 | SDK display name | Swagger Petstore - OpenAPI 3.0 |
 | Root package | `swagger_petstore_open_api_3_0` |
-| Distribution name | `swagger-petstore-open-api-3-0` |
+| Distribution name | `cliV1` |
 | Requires | Python 3.10 or later |
 | API spec version | `1.0.26` |
 | Generator | APIMatic |

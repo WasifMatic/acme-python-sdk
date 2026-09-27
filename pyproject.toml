@@ -1,5 +1,5 @@
 [project]
-name = "swagger-petstore-open-api-3-0"
+name = "cliV1"
 version = "1.0.26"
 description = "The official Python library for the Swagger Petstore - OpenAPI 3.0 API"
 authors = [
