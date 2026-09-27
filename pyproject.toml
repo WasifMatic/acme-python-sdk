@@ -1,14 +1,15 @@
 [project]
 name = "cliV1"
 version = "1.0.26"
-description = "The official Python library for the Swagger Petstore - OpenAPI 3.0 API"
+description = "Thisshshss"
 authors = [
-    { email = "apiteam@swagger.io" },
+    { name = "fwifohq", email = "support@kjsjf.org" },
+    { name = "ihfei", email = "support@jfkef.org" },
 ]
 maintainers = [
-    { name = "APIMatic", email = "support@apimatic.io" },
+    { name = "aDh", email = "sisiy21208@kingdais.com" },
 ]
-keywords = ["sdk", "api-client", "openapi", "rest", "http", "apimatic"]
+keywords = ["Sjfje", "ierue"]
 license = "MIT"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -33,7 +34,8 @@ classifiers = [
 ]
 
 [project.urls]
-"Documentation" = "https://swagger.io"
+"one" = "https://github.com/WasifMatic/acme-java-sdk"
+"vs" = "https://github.com/WasifMatic/acme-java-sdk"
 
 [dependency-groups]
 dev = [
