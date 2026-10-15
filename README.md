@@ -1,15 +1,15 @@
-# Swagger Petstore - OpenAPI 3.0 SDK
+# Swagger Petstore - OpenAPI 3.1.0 SDK
 
 [![Built with APIMatic][apimatic-badge]][apimatic-url] [![License: MIT][license-badge]][license-url] [![Python 3.10+][python-badge]][python-url]
 
-The Swagger Petstore - OpenAPI 3.0 SDK for Python provides access to the [Swagger Petstore - OpenAPI 3.0 REST APIs](https://swagger.io) from Python applications.
+The Swagger Petstore - OpenAPI 3.1.0 SDK for Python provides access to the [Swagger Petstore - OpenAPI 3.1.0 REST APIs](https://swagger.io) from Python applications.
 
 > [!TIP]
 > **Looking for a specific signature, model, enum, or error type?** This SDK ships a generated
 > **[SDK map](sdk-map.md)** -- a lookup index of the SDK's entire Python surface. Consult it before
 > scanning the source tree; details under [SDK map](#sdk-map).
 
-This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
+This is a sample Pet Store Server based on the OpenAPI 3.1.0 specification.  You can find out more about
 Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
 You can now help us improve the API whether it's by making changes to the definition itself or to the code.
 That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
@@ -22,7 +22,7 @@ Some useful links:
 
 ## Installation
 
-Once the distribution is published, install the Python SDK from PyPI, with whichever package manager your project uses:
+To install the Python SDK from PyPI, with whichever package manager your project uses:
 
 ```bash
 pip install cliV1
@@ -48,36 +48,36 @@ pip install <path-to-sdk>
 
 ### Synchronous client
 
-Construct `SwaggerPetstoreOpenApi30Client` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
+Construct `SwaggerPetstoreOpenApi310Client` with keyword arguments, and call `close()` when you are done. Every argument is optional; the full list is in the [SDK map](sdk-map.md).
 
 ```python
-from swagger_petstore_open_api_3_0 import SwaggerPetstoreOpenApi30Client
+from swagger_petstore_open_api_3_1_0 import SwaggerPetstoreOpenApi310Client
 
-client = SwaggerPetstoreOpenApi30Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
+client = SwaggerPetstoreOpenApi310Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
 
 # TODO: call endpoints here -- see api-reference.md
 
 client.close()
 ```
 
-Alternatively, scope it -- `with SwaggerPetstoreOpenApi30Client(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
+Alternatively, scope it -- `with SwaggerPetstoreOpenApi310Client(...) as client:` closes the pool on exit; see [Best Practices](#best-practices).
 
-`Client` is exported as an alias of `SwaggerPetstoreOpenApi30Client`, so `from swagger_petstore_open_api_3_0 import Client` also works.
+`Client` is exported as an alias of `SwaggerPetstoreOpenApi310Client`, so `from swagger_petstore_open_api_3_1_0 import Client` also works.
 
 The SDK accepts every model-typed input in two interchangeable spellings, both type-checked: the typed model, or a plain dict with the same keys -- the `OrDict` and `Model | ModelDict` unions in the [SDK map](sdk-map.md). Pick whichever suits the call site: the dict form needs no import, while the model form adds a keyword-checked constructor and editor completion.
 
 ### Asynchronous client
 
-`AsyncSwaggerPetstoreOpenApi30Client` mirrors `SwaggerPetstoreOpenApi30Client` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
+`AsyncSwaggerPetstoreOpenApi310Client` mirrors `SwaggerPetstoreOpenApi310Client` with **identical method names**, and every endpoint method is a coroutine. It takes the same arguments, with some differences -- for example, the transport argument is `custom_async_http_client`.
 
 ```python
 from asyncio import run
 
-from swagger_petstore_open_api_3_0 import AsyncSwaggerPetstoreOpenApi30Client
+from swagger_petstore_open_api_3_1_0 import AsyncSwaggerPetstoreOpenApi310Client
 
 
 async def main() -> None:
-    client = AsyncSwaggerPetstoreOpenApi30Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
+    client = AsyncSwaggerPetstoreOpenApi310Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
     # TODO: call endpoints here, awaiting each -- see api-reference.md
     await client.aclose()
 
@@ -85,7 +85,7 @@ async def main() -> None:
 run(main())
 ```
 
-Alternatively, scope it -- `async with AsyncSwaggerPetstoreOpenApi30Client(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx; see [Best Practices](#best-practices).
+Alternatively, scope it -- `async with AsyncSwaggerPetstoreOpenApi310Client(...) as client:` closes the pool on exit. Only the async spelling is `aclose`, matching httpx2; see [Best Practices](#best-practices).
 
 `AsyncClient` is the exported alias. Each client accepts **only** its own transport argument; passing the other's is a `TypeError` at runtime and an error under mypy.
 
@@ -108,14 +108,55 @@ This SDK ships a generated **SDK map** -- [`sdk-map.md`](sdk-map.md) -- a determ
 
 Consult the map before scanning or grepping the source: it answers call-level contract questions by lookup, and for anything it does not carry -- model shapes, enum values, an endpoint's route or behavioural prose -- it names the one source file to read. How to read the map itself, including the SDK-wide defaults its rows rely on, is stated at the top of [`sdk-map.md`](sdk-map.md).
 
+## Logging
+
+The SDK logs every HTTP exchange through Python's standard `logging` module, under the `swagger_petstore_open_api_3_1_0` logger, and configures nothing itself: with no logging set up, nothing is printed unless `SWAGGER_PETSTORE_OPEN_API_3_1_0_LOG` is set. Turn it on as for any library:
+
+```python
+import logging
+
+logging.basicConfig()  # your application's handler; the root stays at WARNING
+logging.getLogger("swagger_petstore_open_api_3_1_0").setLevel(logging.INFO)  # the SDK's lines; DEBUG adds the dumps that logging_options turns on
+```
+
+Or set one environment variable before the process starts, for a run you cannot edit: `SWAGGER_PETSTORE_OPEN_API_3_1_0_LOG=info` writes the request and response lines, `SWAGGER_PETSTORE_OPEN_API_3_1_0_LOG=debug` adds the request headers, the request body and the response headers. If your application has configured logging, its handlers and format are used; otherwise the SDK writes to stderr.
+
+Choose the detail with `logging_options`, a `LoggingOptions` from `swagger_petstore_open_api_3_1_0.core`:
+
+```python
+from swagger_petstore_open_api_3_1_0 import SwaggerPetstoreOpenApi310Client
+from swagger_petstore_open_api_3_1_0.core import LoggingOptions
+
+client = SwaggerPetstoreOpenApi310Client(
+    logging_options=LoggingOptions(log_request_headers=True, log_response_headers=True, log_request_body=True)
+)
+```
+
+A plain dict with the same keys is accepted too, as for every model-typed argument (see [Quick Start](#quick-start)): `logging_options={"log_request_headers": True}`.
+
+| Option | Default | Effect |
+| --- | --- | --- |
+| `log_request_headers` | `False` | Log the sent headers at DEBUG, masked. |
+| `log_response_headers` | `False` | Log the received headers at DEBUG, masked. |
+| `log_request_body` | `False` | Log the request body at DEBUG: its text when in memory, a description when streamed. |
+| `body_size_limit` | `32768` | Bytes of a logged body kept before it is cut. |
+| `redaction_placeholder` | `"REDACTED"` | What a hidden value prints as. |
+| `unmask_headers` | none | Header names to show although they are not on the safe list. |
+| `mask_headers` | none | Header names to hide although they are on the safe list. |
+| `mask_keys` | 11 credential names | Query and form keys whose values are always hidden; naming a set replaces the default. |
+
+A single call can be quietened with `request_options={"log_level": logging.WARNING}`: records below that level are not written for that call. It never turns on a record the client's options leave off. Header, query and form values print `REDACTED` unless known safe; a JSON body is printed as sent, so enable `log_request_body` only where its content may be logged; a response body is never logged. The levels and every field are under **Logging** in the SDK map.
+
 ## Best Practices
 
 > [!TIP]
-> Use a **single `SwaggerPetstoreOpenApi30Client` instance** for the lifetime of your application and reuse it across
+> Use a **single `SwaggerPetstoreOpenApi310Client` instance** for the lifetime of your application and reuse it across
 > all requests. Each instance owns its own connection pool, so an instance per request forfeits
 > connection reuse and leaks pools that are never closed.
 
-Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with SwaggerPetstoreOpenApi30Client() as client:` / `async with AsyncSwaggerPetstoreOpenApi30Client() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
+Match the disposal to the client's lifetime: an application-lifetime client is closed once at shutdown with `close()` / `aclose()`; where the lifetime fits a block, `with SwaggerPetstoreOpenApi310Client() as client:` / `async with AsyncSwaggerPetstoreOpenApi310Client() as client:` releases it automatically. Both are idempotent, but a closed client is not reusable: the next call raises. The client closes **whatever transport it holds**, including one you supplied via `custom_http_client` / `custom_async_http_client`; if you intend to reuse your own transport across clients, don't hand its lifetime to a `with` block.
+
+**Retries are on by default**: a failed idempotent request — a retryable status or no response at all — is sent again up to three times before the call gives up. Pass `retry_options=0` to turn it off, for instance in a test that stubs an error response; the policy and its defaults are under **Retries** in the SDK map.
 
 ## License
 

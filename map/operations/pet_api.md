@@ -2,7 +2,7 @@
 
 # PetApi — operations
 
-Accessor: `client.pet_api` · Source: `swagger_petstore_open_api_3_0/apis/pet_api.py` · 8 operations
+Accessor: `client.pet_api` · Source: `swagger_petstore_open_api_3_1_0/apis/pet_api.py` · 8 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded.
 
@@ -21,13 +21,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Category` | `swagger_petstore_open_api_3_0/models/category.py` |
-| `CategoryDict` | `swagger_petstore_open_api_3_0/models/category.py` |
-| `TagModel` | `swagger_petstore_open_api_3_0/models/tag_model.py` |
-| `TagModelDict` | `swagger_petstore_open_api_3_0/models/tag_model.py` |
-| `PetStatusOrStr` | `swagger_petstore_open_api_3_0/models/enums/pet_status.py` |
-| `Pet` | `swagger_petstore_open_api_3_0/models/pet.py` |
-| `AddPetErrorBody` | `swagger_petstore_open_api_3_0/errors/add_pet_error.py` |
+| `Category` | `swagger_petstore_open_api_3_1_0/models/category.py` |
+| `CategoryDict` | `swagger_petstore_open_api_3_1_0/models/category.py` |
+| `TagModel` | `swagger_petstore_open_api_3_1_0/models/tag_model.py` |
+| `TagModelDict` | `swagger_petstore_open_api_3_1_0/models/tag_model.py` |
+| `PetStatusOrStr` | `swagger_petstore_open_api_3_1_0/models/enums/pet_status.py` |
+| `Pet` | `swagger_petstore_open_api_3_1_0/models/pet.py` |
+| `AddPetErrorBody` | `swagger_petstore_open_api_3_1_0/errors/add_pet_error.py` |
 
 ### client.pet_api.delete_pet
 
@@ -44,7 +44,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeletePetErrorBody` | `swagger_petstore_open_api_3_0/errors/delete_pet_error.py` |
+| `DeletePetErrorBody` | `swagger_petstore_open_api_3_1_0/errors/delete_pet_error.py` |
 
 ### client.pet_api.find_pets_by_status
 
@@ -60,9 +60,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `PetStatusOrStr` | `swagger_petstore_open_api_3_0/models/enums/pet_status.py` |
-| `Pet` | `swagger_petstore_open_api_3_0/models/pet.py` |
-| `FindPetsByStatusErrorBody` | `swagger_petstore_open_api_3_0/errors/find_pets_by_status_error.py` |
+| `PetStatusOrStr` | `swagger_petstore_open_api_3_1_0/models/enums/pet_status.py` |
+| `Pet` | `swagger_petstore_open_api_3_1_0/models/pet.py` |
+| `FindPetsByStatusErrorBody` | `swagger_petstore_open_api_3_1_0/errors/find_pets_by_status_error.py` |
 
 ### client.pet_api.find_pets_by_tags
 
@@ -78,8 +78,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Pet` | `swagger_petstore_open_api_3_0/models/pet.py` |
-| `FindPetsByTagsErrorBody` | `swagger_petstore_open_api_3_0/errors/find_pets_by_tags_error.py` |
+| `Pet` | `swagger_petstore_open_api_3_1_0/models/pet.py` |
+| `FindPetsByTagsErrorBody` | `swagger_petstore_open_api_3_1_0/errors/find_pets_by_tags_error.py` |
 
 ### client.pet_api.get_pet_by_id
 
@@ -96,8 +96,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Pet` | `swagger_petstore_open_api_3_0/models/pet.py` |
-| `GetPetByIdErrorBody` | `swagger_petstore_open_api_3_0/errors/get_pet_by_id_error.py` |
+| `Pet` | `swagger_petstore_open_api_3_1_0/models/pet.py` |
+| `GetPetByIdErrorBody` | `swagger_petstore_open_api_3_1_0/errors/get_pet_by_id_error.py` |
 
 ### client.pet_api.update_pet
 
@@ -114,13 +114,13 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Category` | `swagger_petstore_open_api_3_0/models/category.py` |
-| `CategoryDict` | `swagger_petstore_open_api_3_0/models/category.py` |
-| `TagModel` | `swagger_petstore_open_api_3_0/models/tag_model.py` |
-| `TagModelDict` | `swagger_petstore_open_api_3_0/models/tag_model.py` |
-| `PetStatusOrStr` | `swagger_petstore_open_api_3_0/models/enums/pet_status.py` |
-| `Pet` | `swagger_petstore_open_api_3_0/models/pet.py` |
-| `UpdatePetErrorBody` | `swagger_petstore_open_api_3_0/errors/update_pet_error.py` |
+| `Category` | `swagger_petstore_open_api_3_1_0/models/category.py` |
+| `CategoryDict` | `swagger_petstore_open_api_3_1_0/models/category.py` |
+| `TagModel` | `swagger_petstore_open_api_3_1_0/models/tag_model.py` |
+| `TagModelDict` | `swagger_petstore_open_api_3_1_0/models/tag_model.py` |
+| `PetStatusOrStr` | `swagger_petstore_open_api_3_1_0/models/enums/pet_status.py` |
+| `Pet` | `swagger_petstore_open_api_3_1_0/models/pet.py` |
+| `UpdatePetErrorBody` | `swagger_petstore_open_api_3_1_0/errors/update_pet_error.py` |
 
 ### client.pet_api.update_pet_with_form
 
@@ -137,8 +137,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `Pet` | `swagger_petstore_open_api_3_0/models/pet.py` |
-| `UpdatePetWithFormErrorBody` | `swagger_petstore_open_api_3_0/errors/update_pet_with_form_error.py` |
+| `Pet` | `swagger_petstore_open_api_3_1_0/models/pet.py` |
+| `UpdatePetWithFormErrorBody` | `swagger_petstore_open_api_3_1_0/errors/update_pet_with_form_error.py` |
 
 ### client.pet_api.upload_file
 
@@ -155,6 +155,6 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `ApiResponse` | `swagger_petstore_open_api_3_0/models/api_response.py` |
-| `UploadFileErrorBody` | `swagger_petstore_open_api_3_0/errors/upload_file_error.py` |
+| `ApiResponse` | `swagger_petstore_open_api_3_1_0/models/api_response.py` |
+| `UploadFileErrorBody` | `swagger_petstore_open_api_3_1_0/errors/upload_file_error.py` |
 

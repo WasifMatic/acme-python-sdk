@@ -2,11 +2,11 @@
 
 **Raw** endpoints, reached through `with_raw_response`, return `ApiResult[T, E]` and never raise for an API error. For the parsed endpoints, see [API Reference](api-reference.md).
 
-> Source: [SwaggerPetstoreOpenApi30Client](swagger_petstore_open_api_3_0/client.py)
+> Source: [SwaggerPetstoreOpenApi310Client](swagger_petstore_open_api_3_1_0/client.py)
 
 ## PetApi
 
-> Source: [PetApi](swagger_petstore_open_api_3_0/apis/pet_api.py)
+> Source: [PetApi](swagger_petstore_open_api_3_1_0/apis/pet_api.py)
 
 <details>
 <summary><code>def add_pet(name: str, photo_urls: list[str], *, id_: int | None = None, category: Category | CategoryDict | None = None, tags: list[TagModel | TagModelDict] | None = None, status: PetStatusOrStr | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[Pet, AddPetErrorBody]</code></summary>
@@ -64,10 +64,10 @@ match result:
 | <code>name</code> | <code>str</code> | Value sent with the request. |
 | <code>photo_urls</code> | <code>list&#91;str&#93;</code> | Value sent with the request. |
 | <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>category</code> | <code>[Category](swagger_petstore_open_api_3_0/models/category.py) \| [CategoryDict](swagger_petstore_open_api_3_0/models/category.py) \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>tags</code> | <code>list&#91;[TagModel](swagger_petstore_open_api_3_0/models/tag_model.py) \| [TagModelDict](swagger_petstore_open_api_3_0/models/tag_model.py)&#93; \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_0/models/enums/pet_status.py) \| None</code> | pet status in the store<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>category</code> | <code>[Category](swagger_petstore_open_api_3_1_0/models/category.py) \| [CategoryDict](swagger_petstore_open_api_3_1_0/models/category.py) \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>tags</code> | <code>list&#91;[TagModel](swagger_petstore_open_api_3_1_0/models/tag_model.py) \| [TagModelDict](swagger_petstore_open_api_3_1_0/models/tag_model.py)&#93; \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_1_0/models/enums/pet_status.py) \| None</code> | pet status in the store<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -77,18 +77,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py), [AddPetErrorBody](swagger_petstore_open_api_3_0/errors/add_pet_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py), [AddPetErrorBody](swagger_petstore_open_api_3_1_0/errors/add_pet_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_0/models/pet.py)</code> -- Successful operation
+**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)</code> -- Successful operation
 
-**On `Failure`**: `error` is <code>[AddPetErrorBody](swagger_petstore_open_api_3_0/errors/add_pet_error.py)</code>
+**On `Failure`**: `error` is <code>[AddPetErrorBody](swagger_petstore_open_api_3_1_0/errors/add_pet_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 422 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 422 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -153,7 +153,7 @@ match result:
 | --- | --- | --- |
 | <code>pet_id</code> | <code>int</code> | Pet id to delete |
 | <code>api_key</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -163,18 +163,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;None, [DeletePetErrorBody](swagger_petstore_open_api_3_0/errors/delete_pet_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;None, [DeletePetErrorBody](swagger_petstore_open_api_3_1_0/errors/delete_pet_error.py)&#93;</code>
 
 **On `Success`**: the 2xx carries no content; `payload` is <code>None</code>
 
-**On `Failure`**: `error` is <code>[DeletePetErrorBody](swagger_petstore_open_api_3_0/errors/delete_pet_error.py)</code>
+**On `Failure`**: `error` is <code>[DeletePetErrorBody](swagger_petstore_open_api_3_1_0/errors/delete_pet_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -237,8 +237,8 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_0/models/enums/pet_status.py) \| None</code> | Status values that need to be considered for filter<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_1_0/models/enums/pet_status.py) \| None</code> | Status values that need to be considered for filter<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -248,18 +248,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;list&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py)&#93;, [FindPetsByStatusErrorBody](swagger_petstore_open_api_3_0/errors/find_pets_by_status_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;list&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)&#93;, [FindPetsByStatusErrorBody](swagger_petstore_open_api_3_1_0/errors/find_pets_by_status_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>list&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py)&#93;</code> -- successful operation
+**On `Success`**: `payload` is <code>list&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)&#93;</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[FindPetsByStatusErrorBody](swagger_petstore_open_api_3_0/errors/find_pets_by_status_error.py)</code>
+**On `Failure`**: `error` is <code>[FindPetsByStatusErrorBody](swagger_petstore_open_api_3_1_0/errors/find_pets_by_status_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -323,7 +323,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>tags</code> | <code>list&#91;str&#93; \| None</code> | Tags to filter by<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -333,18 +333,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;list&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py)&#93;, [FindPetsByTagsErrorBody](swagger_petstore_open_api_3_0/errors/find_pets_by_tags_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;list&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)&#93;, [FindPetsByTagsErrorBody](swagger_petstore_open_api_3_1_0/errors/find_pets_by_tags_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>list&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py)&#93;</code> -- successful operation
+**On `Success`**: `payload` is <code>list&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)&#93;</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[FindPetsByTagsErrorBody](swagger_petstore_open_api_3_0/errors/find_pets_by_tags_error.py)</code>
+**On `Failure`**: `error` is <code>[FindPetsByTagsErrorBody](swagger_petstore_open_api_3_1_0/errors/find_pets_by_tags_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -408,7 +408,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>pet_id</code> | <code>int</code> | ID of pet to return |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -418,18 +418,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py), [GetPetByIdErrorBody](swagger_petstore_open_api_3_0/errors/get_pet_by_id_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py), [GetPetByIdErrorBody](swagger_petstore_open_api_3_1_0/errors/get_pet_by_id_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_0/models/pet.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[GetPetByIdErrorBody](swagger_petstore_open_api_3_0/errors/get_pet_by_id_error.py)</code>
+**On `Failure`**: `error` is <code>[GetPetByIdErrorBody](swagger_petstore_open_api_3_1_0/errors/get_pet_by_id_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -495,10 +495,10 @@ match result:
 | <code>name</code> | <code>str</code> | Value sent with the request. |
 | <code>photo_urls</code> | <code>list&#91;str&#93;</code> | Value sent with the request. |
 | <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>category</code> | <code>[Category](swagger_petstore_open_api_3_0/models/category.py) \| [CategoryDict](swagger_petstore_open_api_3_0/models/category.py) \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>tags</code> | <code>list&#91;[TagModel](swagger_petstore_open_api_3_0/models/tag_model.py) \| [TagModelDict](swagger_petstore_open_api_3_0/models/tag_model.py)&#93; \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_0/models/enums/pet_status.py) \| None</code> | pet status in the store<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>category</code> | <code>[Category](swagger_petstore_open_api_3_1_0/models/category.py) \| [CategoryDict](swagger_petstore_open_api_3_1_0/models/category.py) \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>tags</code> | <code>list&#91;[TagModel](swagger_petstore_open_api_3_1_0/models/tag_model.py) \| [TagModelDict](swagger_petstore_open_api_3_1_0/models/tag_model.py)&#93; \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
+| <code>status</code> | <code>[PetStatusOrStr](swagger_petstore_open_api_3_1_0/models/enums/pet_status.py) \| None</code> | pet status in the store<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -508,18 +508,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py), [UpdatePetErrorBody](swagger_petstore_open_api_3_0/errors/update_pet_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py), [UpdatePetErrorBody](swagger_petstore_open_api_3_1_0/errors/update_pet_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_0/models/pet.py)</code> -- Successful operation
+**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)</code> -- Successful operation
 
-**On `Failure`**: `error` is <code>[UpdatePetErrorBody](swagger_petstore_open_api_3_0/errors/update_pet_error.py)</code>
+**On `Failure`**: `error` is <code>[UpdatePetErrorBody](swagger_petstore_open_api_3_1_0/errors/update_pet_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404, 422 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404, 422 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -585,7 +585,7 @@ match result:
 | <code>pet_id</code> | <code>int</code> | ID of pet that needs to be updated |
 | <code>name</code> | <code>str \| None</code> | Name of pet that needs to be updated<br>**Default**: <code>None</code> |
 | <code>status</code> | <code>str \| None</code> | Status of pet that needs to be updated<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -595,18 +595,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_0/models/pet.py), [UpdatePetWithFormErrorBody](swagger_petstore_open_api_3_0/errors/update_pet_with_form_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[Pet](swagger_petstore_open_api_3_1_0/models/pet.py), [UpdatePetWithFormErrorBody](swagger_petstore_open_api_3_1_0/errors/update_pet_with_form_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_0/models/pet.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[Pet](swagger_petstore_open_api_3_1_0/models/pet.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[UpdatePetWithFormErrorBody](swagger_petstore_open_api_3_0/errors/update_pet_with_form_error.py)</code>
+**On `Failure`**: `error` is <code>[UpdatePetWithFormErrorBody](swagger_petstore_open_api_3_1_0/errors/update_pet_with_form_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -672,7 +672,7 @@ match result:
 | <code>pet_id</code> | <code>int</code> | ID of pet to update |
 | <code>additional_metadata</code> | <code>str \| None</code> | Additional Metadata<br>**Default**: <code>None</code> |
 | <code>body</code> | <code>FileInput \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -682,18 +682,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[ApiResponse](swagger_petstore_open_api_3_0/models/api_response.py), [UploadFileErrorBody](swagger_petstore_open_api_3_0/errors/upload_file_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[ApiResponse](swagger_petstore_open_api_3_1_0/models/api_response.py), [UploadFileErrorBody](swagger_petstore_open_api_3_1_0/errors/upload_file_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[ApiResponse](swagger_petstore_open_api_3_0/models/api_response.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[ApiResponse](swagger_petstore_open_api_3_1_0/models/api_response.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[UploadFileErrorBody](swagger_petstore_open_api_3_0/errors/upload_file_error.py)</code>
+**On `Failure`**: `error` is <code>[UploadFileErrorBody](swagger_petstore_open_api_3_1_0/errors/upload_file_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -705,7 +705,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 
 ## Store
 
-> Source: [Store](swagger_petstore_open_api_3_0/apis/store.py)
+> Source: [Store](swagger_petstore_open_api_3_1_0/apis/store.py)
 
 <details>
 <summary><code>def delete_order(order_id: int, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, DeleteOrderErrorBody]</code></summary>
@@ -761,7 +761,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>order_id</code> | <code>int</code> | ID of the order that needs to be deleted |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -771,18 +771,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;None, [DeleteOrderErrorBody](swagger_petstore_open_api_3_0/errors/delete_order_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;None, [DeleteOrderErrorBody](swagger_petstore_open_api_3_1_0/errors/delete_order_error.py)&#93;</code>
 
 **On `Success`**: the 2xx carries no content; `payload` is <code>None</code>
 
-**On `Failure`**: `error` is <code>[DeleteOrderErrorBody](swagger_petstore_open_api_3_0/errors/delete_order_error.py)</code>
+**On `Failure`**: `error` is <code>[DeleteOrderErrorBody](swagger_petstore_open_api_3_1_0/errors/delete_order_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -845,7 +845,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -855,11 +855,11 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;dict&#91;str, int&#93;, [RawError](swagger_petstore_open_api_3_0/core/results.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;dict&#91;str, int&#93;, [RawError](swagger_petstore_open_api_3_1_0/core/results.py)&#93;</code>
 
 **On `Success`**: `payload` is <code>dict&#91;str, int&#93;</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code>
+**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code>
 
 </dd>
 </dl>
@@ -923,7 +923,7 @@ match result:
 | Name | Type | Description |
 | --- | --- | --- |
 | <code>order_id</code> | <code>int</code> | ID of order that needs to be fetched |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -933,18 +933,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[Order](swagger_petstore_open_api_3_0/models/order.py), [GetOrderByIdErrorBody](swagger_petstore_open_api_3_0/errors/get_order_by_id_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[Order](swagger_petstore_open_api_3_1_0/models/order.py), [GetOrderByIdErrorBody](swagger_petstore_open_api_3_1_0/errors/get_order_by_id_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[Order](swagger_petstore_open_api_3_0/models/order.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[Order](swagger_petstore_open_api_3_1_0/models/order.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[GetOrderByIdErrorBody](swagger_petstore_open_api_3_0/errors/get_order_by_id_error.py)</code>
+**On `Failure`**: `error` is <code>[GetOrderByIdErrorBody](swagger_petstore_open_api_3_1_0/errors/get_order_by_id_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -1011,9 +1011,9 @@ match result:
 | <code>pet_id</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>quantity</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>ship_date</code> | <code>RFC3339DateTime \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>status</code> | <code>[OrderStatusOrStr](swagger_petstore_open_api_3_0/models/enums/order_status.py) \| None</code> | Order Status<br>**Default**: <code>None</code> |
+| <code>status</code> | <code>[OrderStatusOrStr](swagger_petstore_open_api_3_1_0/models/enums/order_status.py) \| None</code> | Order Status<br>**Default**: <code>None</code> |
 | <code>complete</code> | <code>bool \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1023,18 +1023,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[Order](swagger_petstore_open_api_3_0/models/order.py), [PlaceOrderErrorBody](swagger_petstore_open_api_3_0/errors/place_order_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[Order](swagger_petstore_open_api_3_1_0/models/order.py), [PlaceOrderErrorBody](swagger_petstore_open_api_3_1_0/errors/place_order_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[Order](swagger_petstore_open_api_3_0/models/order.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[Order](swagger_petstore_open_api_3_1_0/models/order.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[PlaceOrderErrorBody](swagger_petstore_open_api_3_0/errors/place_order_error.py)</code>
+**On `Failure`**: `error` is <code>[PlaceOrderErrorBody](swagger_petstore_open_api_3_1_0/errors/place_order_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 422 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 422 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -1046,7 +1046,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 
 ## UserApi
 
-> Source: [UserApi](swagger_petstore_open_api_3_0/apis/user_api.py)
+> Source: [UserApi](swagger_petstore_open_api_3_1_0/apis/user_api.py)
 
 <details>
 <summary><code>def create_user(*, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[User, RawError]</code></summary>
@@ -1127,7 +1127,7 @@ match result:
 | <code>password</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>phone</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>user_status</code> | <code>int \| None</code> | User Status<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1137,11 +1137,11 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[User](swagger_petstore_open_api_3_0/models/user.py), [RawError](swagger_petstore_open_api_3_0/core/results.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[User](swagger_petstore_open_api_3_1_0/models/user.py), [RawError](swagger_petstore_open_api_3_1_0/core/results.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[User](swagger_petstore_open_api_3_0/models/user.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[User](swagger_petstore_open_api_3_1_0/models/user.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code>
+**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code>
 
 </dd>
 </dl>
@@ -1204,8 +1204,8 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>body</code> | <code>list&#91;[User](swagger_petstore_open_api_3_0/models/user.py) \| [UserDict](swagger_petstore_open_api_3_0/models/user.py)&#93; \| None</code> | The request body.<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>body</code> | <code>list&#91;[User](swagger_petstore_open_api_3_1_0/models/user.py) \| [UserDict](swagger_petstore_open_api_3_1_0/models/user.py)&#93; \| None</code> | The request body.<br>**Default**: <code>None</code> |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1215,11 +1215,11 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[User](swagger_petstore_open_api_3_0/models/user.py), [RawError](swagger_petstore_open_api_3_0/core/results.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[User](swagger_petstore_open_api_3_1_0/models/user.py), [RawError](swagger_petstore_open_api_3_1_0/core/results.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[User](swagger_petstore_open_api_3_0/models/user.py)</code> -- Successful operation
+**On `Success`**: `payload` is <code>[User](swagger_petstore_open_api_3_1_0/models/user.py)</code> -- Successful operation
 
-**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code>
+**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code>
 
 </dd>
 </dl>
@@ -1230,7 +1230,7 @@ match result:
 </details>
 
 <details>
-<summary><code>def delete_user(usersname: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, DeleteUserErrorBody]</code></summary>
+<summary><code>def delete_user(current_username: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, DeleteUserErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -1282,8 +1282,8 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>usersname</code> | <code>str</code> | The username that needs to be processed |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>current_username</code> | <code>str</code> | The username that needs to be processed |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1293,18 +1293,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;None, [DeleteUserErrorBody](swagger_petstore_open_api_3_0/errors/delete_user_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;None, [DeleteUserErrorBody](swagger_petstore_open_api_3_1_0/errors/delete_user_error.py)&#93;</code>
 
 **On `Success`**: the 2xx carries no content; `payload` is <code>None</code>
 
-**On `Failure`**: `error` is <code>[DeleteUserErrorBody](swagger_petstore_open_api_3_0/errors/delete_user_error.py)</code>
+**On `Failure`**: `error` is <code>[DeleteUserErrorBody](swagger_petstore_open_api_3_1_0/errors/delete_user_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -1315,7 +1315,7 @@ Mapped in first-match order -- an earlier row wins over a later range that also 
 </details>
 
 <details>
-<summary><code>def get_user_by_name(usersname: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[User, GetUserByNameErrorBody]</code></summary>
+<summary><code>def get_user_by_name(current_username: str, *, request_options: RequestOptionsOrDict | None = None) -> ApiResult[User, GetUserByNameErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -1367,8 +1367,8 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>usersname</code> | <code>str</code> | The username that needs to be processed |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>current_username</code> | <code>str</code> | The username that needs to be processed |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1378,18 +1378,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;[User](swagger_petstore_open_api_3_0/models/user.py), [GetUserByNameErrorBody](swagger_petstore_open_api_3_0/errors/get_user_by_name_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;[User](swagger_petstore_open_api_3_1_0/models/user.py), [GetUserByNameErrorBody](swagger_petstore_open_api_3_1_0/errors/get_user_by_name_error.py)&#93;</code>
 
-**On `Success`**: `payload` is <code>[User](swagger_petstore_open_api_3_0/models/user.py)</code> -- successful operation
+**On `Success`**: `payload` is <code>[User](swagger_petstore_open_api_3_1_0/models/user.py)</code> -- successful operation
 
-**On `Failure`**: `error` is <code>[GetUserByNameErrorBody](swagger_petstore_open_api_3_0/errors/get_user_by_name_error.py)</code>
+**On `Failure`**: `error` is <code>[GetUserByNameErrorBody](swagger_petstore_open_api_3_1_0/errors/get_user_by_name_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -1454,7 +1454,7 @@ match result:
 | --- | --- | --- |
 | <code>username</code> | <code>str \| None</code> | The user name for login<br>**Default**: <code>None</code> |
 | <code>password</code> | <code>str \| None</code> | The password for login in clear text<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1464,18 +1464,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;None, [LoginUserErrorBody](swagger_petstore_open_api_3_0/errors/login_user_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;None, [LoginUserErrorBody](swagger_petstore_open_api_3_1_0/errors/login_user_error.py)&#93;</code>
 
 **On `Success`**: the 2xx carries no content; `payload` is <code>None</code>
 
-**On `Failure`**: `error` is <code>[LoginUserErrorBody](swagger_petstore_open_api_3_0/errors/login_user_error.py)</code>
+**On `Failure`**: `error` is <code>[LoginUserErrorBody](swagger_petstore_open_api_3_1_0/errors/login_user_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>
@@ -1538,7 +1538,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1548,11 +1548,11 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;None, [RawError](swagger_petstore_open_api_3_0/core/results.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;None, [RawError](swagger_petstore_open_api_3_1_0/core/results.py)&#93;</code>
 
 **On `Success`**: the 2xx carries no content; `payload` is <code>None</code>
 
-**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code>
+**On `Failure`**: `error` is <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code>
 
 </dd>
 </dl>
@@ -1563,7 +1563,7 @@ match result:
 </details>
 
 <details>
-<summary><code>def update_user(usersname: str, *, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, UpdateUserErrorBody]</code></summary>
+<summary><code>def update_user(current_username: str, *, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None) -> ApiResult[None, UpdateUserErrorBody]</code></summary>
 
 <dl>
 <dd>
@@ -1635,7 +1635,7 @@ match result:
 
 | Name | Type | Description |
 | --- | --- | --- |
-| <code>usersname</code> | <code>str</code> | The username that needs to be processed |
+| <code>current_username</code> | <code>str</code> | The username that needs to be processed |
 | <code>id_</code> | <code>int \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>username</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>first_name</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
@@ -1644,7 +1644,7 @@ match result:
 | <code>password</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>phone</code> | <code>str \| None</code> | Value sent with the request.<br>**Default**: <code>None</code> |
 | <code>user_status</code> | <code>int \| None</code> | User Status<br>**Default**: <code>None</code> |
-| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout or extra headers. |
+| <code>request_options</code> | <code>[RequestOptionsOrDict](swagger_petstore_open_api_3_1_0/core/request_options.py) \| None</code> | Per-call overrides for this one request, such as a timeout, extra headers, or its retry count and statuses. |
 
 </dd>
 </dl>
@@ -1654,18 +1654,18 @@ match result:
 <dl>
 <dd>
 
-**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_0/core/results.py)&#91;None, [UpdateUserErrorBody](swagger_petstore_open_api_3_0/errors/update_user_error.py)&#93;</code>
+**Returns**: <code>[ApiResult](swagger_petstore_open_api_3_1_0/core/results.py)&#91;None, [UpdateUserErrorBody](swagger_petstore_open_api_3_1_0/errors/update_user_error.py)&#93;</code>
 
 **On `Success`**: the 2xx carries no content; `payload` is <code>None</code>
 
-**On `Failure`**: `error` is <code>[UpdateUserErrorBody](swagger_petstore_open_api_3_0/errors/update_user_error.py)</code>
+**On `Failure`**: `error` is <code>[UpdateUserErrorBody](swagger_petstore_open_api_3_1_0/errors/update_user_error.py)</code>
 
 Mapped in first-match order -- an earlier row wins over a later range that also covers the status:
 
 | Status | `error` is |
 | --- | --- |
-| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
-| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_0/core/results.py)</code> |
+| 400, 404 | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
+| anything unmapped | <code>[RawError](swagger_petstore_open_api_3_1_0/core/results.py)</code> |
 
 </dd>
 </dl>

@@ -2,7 +2,7 @@
 
 # UserApi — operations
 
-Accessor: `client.user_api` · Source: `swagger_petstore_open_api_3_0/apis/user_api.py` · 7 operations
+Accessor: `client.user_api` · Source: `swagger_petstore_open_api_3_1_0/apis/user_api.py` · 7 operations
 
 Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omit what its invariants table covers and are otherwise self-contained, so chunk at block level. Signatures are the sync parsed spelling; the async and raw spellings take the same parameters (see sdk-map.md). **Type sources** names the module declaring each type an operation mentions, so resolving a body, return or error payload is a lookup rather than a search; the runtime types `RawError` and `ApiResult` are excluded, and an operation with no table mentions nothing but builtins and those.
 
@@ -18,7 +18,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `User` | `swagger_petstore_open_api_3_0/models/user.py` |
+| `User` | `swagger_petstore_open_api_3_1_0/models/user.py` |
 
 ### client.user_api.create_users_with_list_input
 
@@ -32,16 +32,16 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `User` | `swagger_petstore_open_api_3_0/models/user.py` |
-| `UserDict` | `swagger_petstore_open_api_3_0/models/user.py` |
+| `User` | `swagger_petstore_open_api_3_1_0/models/user.py` |
+| `UserDict` | `swagger_petstore_open_api_3_1_0/models/user.py` |
 
 ### client.user_api.delete_user
 
 - **Route**: `DELETE /user/{usersname}`
 - **Server**: `default`
-- **Signature**: `def delete_user(usersname: str, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `usersname`
-- **Params**: `usersname` — path
+- **Signature**: `def delete_user(current_username: str, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `current_username`
+- **Params**: `current_username` — path `usersname`
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, DeleteUserErrorBody]`
 - **Error**: `DeleteUserErrorBody` — **Case A (typed)**
@@ -49,15 +49,15 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `DeleteUserErrorBody` | `swagger_petstore_open_api_3_0/errors/delete_user_error.py` |
+| `DeleteUserErrorBody` | `swagger_petstore_open_api_3_1_0/errors/delete_user_error.py` |
 
 ### client.user_api.get_user_by_name
 
 - **Route**: `GET /user/{usersname}`
 - **Server**: `default`
-- **Signature**: `def get_user_by_name(usersname: str, *, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `usersname`
-- **Params**: `usersname` — path
+- **Signature**: `def get_user_by_name(current_username: str, *, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `current_username`
+- **Params**: `current_username` — path `usersname`
 - **Returns (parsed)**: `User`
 - **Returns (raw)**: `ApiResult[User, GetUserByNameErrorBody]`
 - **Error**: `GetUserByNameErrorBody` — **Case A (typed)**
@@ -65,8 +65,8 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `User` | `swagger_petstore_open_api_3_0/models/user.py` |
-| `GetUserByNameErrorBody` | `swagger_petstore_open_api_3_0/errors/get_user_by_name_error.py` |
+| `User` | `swagger_petstore_open_api_3_1_0/models/user.py` |
+| `GetUserByNameErrorBody` | `swagger_petstore_open_api_3_1_0/errors/get_user_by_name_error.py` |
 
 ### client.user_api.login_user
 
@@ -81,7 +81,7 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `LoginUserErrorBody` | `swagger_petstore_open_api_3_0/errors/login_user_error.py` |
+| `LoginUserErrorBody` | `swagger_petstore_open_api_3_1_0/errors/login_user_error.py` |
 
 ### client.user_api.logout_user
 
@@ -96,9 +96,9 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 - **Route**: `PUT /user/{usersname}`
 - **Server**: `default`
-- **Signature**: `def update_user(usersname: str, *, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None)`
-  - required, positional: `usersname`
-- **Params**: `usersname` — path · `id_` — form field `id` · `username` — form field · `first_name` — form field `firstName` · `last_name` — form field `lastName` · `email` — form field · `password` — form field · `phone` — form field · `user_status` — form field `userStatus`
+- **Signature**: `def update_user(current_username: str, *, id_: int | None = None, username: str | None = None, first_name: str | None = None, last_name: str | None = None, email: str | None = None, password: str | None = None, phone: str | None = None, user_status: int | None = None, request_options: RequestOptionsOrDict | None = None)`
+  - required, positional: `current_username`
+- **Params**: `current_username` — path `usersname` · `id_` — form field `id` · `username` — form field · `first_name` — form field `firstName` · `last_name` — form field `lastName` · `email` — form field · `password` — form field · `phone` — form field · `user_status` — form field `userStatus`
 - **Returns (parsed)**: `None`
 - **Returns (raw)**: `ApiResult[None, UpdateUserErrorBody]`
 - **Error**: `UpdateUserErrorBody` — **Case A (typed)**
@@ -106,5 +106,5 @@ Each `###` block is one operation and assumes `sdk-map.md` is loaded: blocks omi
 
 | Type | Source |
 | --- | --- |
-| `UpdateUserErrorBody` | `swagger_petstore_open_api_3_0/errors/update_user_error.py` |
+| `UpdateUserErrorBody` | `swagger_petstore_open_api_3_1_0/errors/update_user_error.py` |
 

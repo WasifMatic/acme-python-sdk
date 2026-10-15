@@ -1,13 +1,13 @@
 <!-- Generated file — do not edit; regenerated with the SDK. -->
 
-# SDK map — Swagger Petstore - OpenAPI 3.0 (Python)
+# SDK map — Swagger Petstore - OpenAPI 3.1.0 (Python)
 
 > A generated table of contents for this SDK. Consult this map and its sub-pages to learn signatures, error types, and server/auth wiring **by lookup**. Model shapes and enum values are *not* duplicated here — the map names the module declaring each type; read the shape there. Every name is the emitted spelling, so a wrong one fails at import rather than working silently.
 
 |  |  |
 | --- | --- |
-| SDK display name | Swagger Petstore - OpenAPI 3.0 |
-| Root package | `swagger_petstore_open_api_3_0` |
+| SDK display name | Swagger Petstore - OpenAPI 3.1.0 |
+| Root package | `swagger_petstore_open_api_3_1_0` |
 | Distribution name | `cliV1` |
 | Requires | Python 3.10 or later |
 | API spec version | `1.0.26` |
@@ -24,27 +24,27 @@ All `Source` paths on this map and its sub-pages are relative to the **SDK root*
 ### Synchronous client
 
 ```python
-from swagger_petstore_open_api_3_0 import SwaggerPetstoreOpenApi30Client
+from swagger_petstore_open_api_3_1_0 import SwaggerPetstoreOpenApi310Client
 
-client = SwaggerPetstoreOpenApi30Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
+client = SwaggerPetstoreOpenApi310Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
 
 # TODO: call endpoints here -- see api-reference.md
 
 client.close()
 ```
 
-Alternatively, scope it — `with SwaggerPetstoreOpenApi30Client(...) as client:` closes the pool on exit.
+Alternatively, scope it — `with SwaggerPetstoreOpenApi310Client(...) as client:` closes the pool on exit.
 
 ### Asynchronous client
 
 ```python
 from asyncio import run
 
-from swagger_petstore_open_api_3_0 import AsyncSwaggerPetstoreOpenApi30Client
+from swagger_petstore_open_api_3_1_0 import AsyncSwaggerPetstoreOpenApi310Client
 
 
 async def main() -> None:
-    client = AsyncSwaggerPetstoreOpenApi30Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
+    client = AsyncSwaggerPetstoreOpenApi310Client(petstore_auth="YOUR_API_KEY", api_key="YOUR_API_KEY")
     # TODO: call endpoints here, awaiting each -- see api-reference.md
     await client.aclose()
 
@@ -52,20 +52,22 @@ async def main() -> None:
 run(main())
 ```
 
-Alternatively, scope it — `async with AsyncSwaggerPetstoreOpenApi30Client(...) as client:` closes the pool on exit.
+Alternatively, scope it — `async with AsyncSwaggerPetstoreOpenApi310Client(...) as client:` closes the pool on exit.
 
-`AsyncClient` (`swagger_petstore_open_api_3_0/async_client.py`) mirrors `Client` method for method, each endpoint method a coroutine. It takes the same keywords, except that each client accepts only its own transport and — where the **Async Type** column differs — only its own flavor.
+`AsyncClient` (`swagger_petstore_open_api_3_1_0/async_client.py`) mirrors `Client` method for method, each endpoint method a coroutine. It takes the same keywords, except that each client accepts only its own transport and — where the **Async Type** column differs — only its own flavor.
 
-`Client` and `AsyncClient` are aliases of `SwaggerPetstoreOpenApi30Client` and `AsyncSwaggerPetstoreOpenApi30Client` — the names tracebacks and `repr()` show; all four import from the root.
+`Client` and `AsyncClient` are aliases of `SwaggerPetstoreOpenApi310Client` and `AsyncSwaggerPetstoreOpenApi310Client` — the names tracebacks and `repr()` show; all four import from the root.
 
 `close()` / `aclose()` closes the transport even when you supplied one via `custom_http_client=` / `custom_async_http_client=`, and a closed client cannot be reused.
 
-Every API group is a property on the client (e.g. `client.pet_api`). Every constructor argument is optional and keyword-only. Sources: `swagger_petstore_open_api_3_0/client.py`, `swagger_petstore_open_api_3_0/async_client.py`:
+Every API group is a property on the client (e.g. `client.pet_api`). Every constructor argument is optional and keyword-only. Sources: `swagger_petstore_open_api_3_1_0/client.py`, `swagger_petstore_open_api_3_1_0/async_client.py`:
 
 | Keyword | Sync Type | Async Type | Default |
 | --- | --- | --- | --- |
 | `server_config` | `ServerConfigOrDict \| None` | `ServerConfigOrDict \| None` | `None` |
 | `timeout` | `float` | `float` | `30.0` seconds |
+| `retry_options` | `int \| RetryOptionsOrDict \| None` | `int \| RetryOptionsOrDict \| None` | `None` |
+| `logging_options` | `LoggingOptionsOrDict \| None` | `LoggingOptionsOrDict \| None` | `None` |
 | `custom_http_client` | `HttpClient \| None` | — | `None` |
 | `custom_async_http_client` | — | `AsyncHttpClient \| None` | `None` |
 | `petstore_auth` | `str \| None` | `str \| None` | `None` |
@@ -75,9 +77,50 @@ The types those columns name — where each imports from and, for a credentials 
 
 | Type | Import from | Shape |
 | --- | --- | --- |
-| `ServerConfigOrDict` | `swagger_petstore_open_api_3_0.server` | keys as the Servers & auth tables read |
-| `HttpClient` | `swagger_petstore_open_api_3_0.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()`; `send` returns once the head has arrived and never reads the body |
-| `AsyncHttpClient` | `swagger_petstore_open_api_3_0.core` | protocol — `async send(request: HttpRequest) -> AsyncHttpResponse` · `async aclose()`; the same obligation, awaited |
+| `ServerConfigOrDict` | `swagger_petstore_open_api_3_1_0.server` | keys as the Servers & auth tables read |
+| `RetryOptionsOrDict` | `swagger_petstore_open_api_3_1_0.core` | a retry count, `RetryOptions`, or a dict: `max_retries: int` · `initial_delay: float` · `backoff_factor: float` · `max_delay: float` · `max_jitter: float` · `status_codes_to_retry: frozenset[int]` · `http_methods_to_retry: frozenset[HttpMethod]` |
+| `LoggingOptionsOrDict` | `swagger_petstore_open_api_3_1_0.core` | `LoggingOptions` or a dict: `log_request_headers: bool` · `log_response_headers: bool` · `log_request_body: bool` · `body_size_limit: int` · `redaction_placeholder: str` · `unmask_headers: AbstractSet[str]` · `mask_headers: AbstractSet[str]` · `mask_keys: AbstractSet[str]` |
+| `HttpClient` | `swagger_petstore_open_api_3_1_0.core` | protocol — `send(request: HttpRequest) -> HttpResponse` · `close()`; `send` returns once the head has arrived and never reads the body, and raises `TransportError` (from `core`) when no response arrives — anything else it raises is never retried |
+| `AsyncHttpClient` | `swagger_petstore_open_api_3_1_0.core` | protocol — `async send(request: HttpRequest) -> AsyncHttpResponse` · `async aclose()`; the same obligation, awaited |
+
+### Retries — on by default
+
+`retry_options` left at `None` applies the default `RetryOptions` policy below, so an unconfigured client **retries**: a request whose method is in `http_methods_to_retry` is sent again when it gets a status in `status_codes_to_retry`, or no response at all, and the last outcome reaches you only once its retries are spent. A body that cannot be re-sent byte for byte — a streamed file upload — is never retried. `retry_options=0` (or `{"max_retries": 0}`) turns retrying off; a bare count sets `max_retries` and leaves every other field at its default.
+
+`RetryOptions` fields (source: `swagger_petstore_open_api_3_1_0/core/retries.py`). Pass only the fields you change; each one left out takes its default:
+
+| Field | Type | Default |
+| --- | --- | --- |
+| `max_retries` | `int` | `3` |
+| `initial_delay` | `float` (seconds) | `1.0` |
+| `backoff_factor` | `float` | `2.0` |
+| `max_delay` | `float` (seconds) | `60.0` |
+| `max_jitter` | `float` (seconds) | `0.5` |
+| `status_codes_to_retry` | `frozenset[int]` | `frozenset({408, 429, 500, 502, 503, 504})` |
+| `http_methods_to_retry` | `frozenset[HttpMethod]` | `frozenset({"GET", "HEAD", "PUT", "OPTIONS"})` |
+
+The wait before retry *n* is `initial_delay × backoff_factor^(n−1)` plus up to `max_jitter` of random delay, the sum capped at `max_delay`; a `Retry-After` header replaces it, trimmed to `max_delay`.
+
+A single call overrides two of these through `request_options` (`swagger_petstore_open_api_3_1_0/core/request_options.py`): `max_retries` and `status_codes_to_retry`, each merged over the client's policy field by field — `request_options={"max_retries": 0}` turns retrying off for that one call and leaves every other call alone.
+
+### Logging — off by default
+
+Every HTTP exchange is written through the standard `logging` module under the `swagger_petstore_open_api_3_1_0` logger, and the SDK configures nothing itself. Set that logger's level to turn it on: INFO writes the request line and a 2xx response line, WARNING a non-2xx response line and each retry, ERROR a call that ends in an exception, and DEBUG the header dumps and the request body that the flags below turn on. Or set `SWAGGER_PETSTORE_OPEN_API_3_1_0_LOG=info|debug` before the process starts: it sets the level, turns the three flags on for `debug`, and adds a stderr handler only where nothing listens.
+
+`LoggingOptions` fields (source: `swagger_petstore_open_api_3_1_0/core/logging.py`). Pass only the fields you change; each one left out takes its default, and a name set you pass replaces its default:
+
+| Field | Type | Default |
+| --- | --- | --- |
+| `log_request_headers` | `bool` | `False` |
+| `log_response_headers` | `bool` | `False` |
+| `log_request_body` | `bool` | `False` |
+| `body_size_limit` | `int` (bytes) | `32768` |
+| `redaction_placeholder` | `str` | `"REDACTED"` |
+| `unmask_headers` | `AbstractSet[str]` | `frozenset()` |
+| `mask_headers` | `AbstractSet[str]` | `frozenset()` |
+| `mask_keys` | `AbstractSet[str]` | `frozenset({"sig", "signature", "access_token", "apikey", "api_key", "client_secret", "password", "refresh_token", "code", "assertion", "client_assertion"})` |
+
+A single call is quietened through `request_options` (`swagger_petstore_open_api_3_1_0/core/request_options.py`): `log_level`, a `logging` level constant, is a floor below which that call's records are not written; it never turns a dump or the body on. A header value prints `REDACTED` unless its name is on the runtime's safe list, a query value unless its key is a paging name, and a form field whose key is in `mask_keys` always; a JSON body prints as sent; a response body is never logged.
 
 ---
 
@@ -90,16 +133,16 @@ Every operation is reached in two response modes:
 
 What `.error` holds is fixed per operation. There are two cases:
 
-- **Case A — typed error.** The operation documents at least one error status, so `swagger_petstore_open_api_3_0/errors/` declares a union alias over the bodies those statuses map to — `RawError` is always its last arm, for any undocumented status — and `.error` is annotated with that alias. Narrow it with `isinstance`. The operation blocks name the alias and the status each arm maps from.
-- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`swagger_petstore_open_api_3_0/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any`.
+- **Case A — typed error.** The operation documents at least one error status, so `swagger_petstore_open_api_3_1_0/errors/` declares a union alias over the bodies those statuses map to — `RawError` is always its last arm, for any undocumented status — and `.error` is annotated with that alias. Narrow it with `isinstance`. The operation blocks name the alias and the status each arm maps from.
+- **Case B — raw error.** The operation documents no error status; `.error` is `RawError` (`swagger_petstore_open_api_3_1_0/core/results.py`): `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any`.
 
-Core runtime types (`swagger_petstore_open_api_3_0/core/`) — public members with their **declared types**, verbatim from source:
+Core runtime types (`swagger_petstore_open_api_3_1_0/core/`) — public members with their **declared types**, verbatim from source:
 
 | Type | Public members | Source |
 | --- | --- | --- |
-| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `swagger_petstore_open_api_3_0/errors/` or `RawError` | `error: E` · `status_code: int` · `headers: Mapping[str, str]` | `swagger_petstore_open_api_3_0/core/exceptions.py` |
-| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `status_code: int` · `headers: Mapping[str, str]` (both on either) | `swagger_petstore_open_api_3_0/core/results.py` |
-| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` | `swagger_petstore_open_api_3_0/core/results.py` |
+| `ApiError` — raised by every parsed call; `.error` is a Case A alias from `swagger_petstore_open_api_3_1_0/errors/` or `RawError` | `error: E` · `status_code: int` · `headers: Mapping[str, str]` | `swagger_petstore_open_api_3_1_0/core/exceptions.py` |
+| `ApiResult[T, E]` — returned by every raw call; the `Success[T] \| Failure[E]` union | `payload: T` (on `Success`) · `error: E` (on `Failure`) · `status_code: int` · `headers: Mapping[str, str]` (both on either) | `swagger_petstore_open_api_3_1_0/core/results.py` |
+| `RawError` | `status_code: int` · `content: bytes` · `text(encoding="utf-8"): str` · `json(): Any` | `swagger_petstore_open_api_3_1_0/core/results.py` |
 
 Typed error bodies (the arms of a Case A alias) are ordinary models — no special handling. The operation's **Type sources** table gives the module that declares each one; read field names, declared types and JSON aliases there, as for any other model.
 
@@ -128,7 +171,7 @@ Each links to a sub-page with one block per operation, headed by its full access
 | **Four spellings, one signature** — the same method name and parameters on `Client` and `AsyncClient`, each also reachable through `.with_raw_response`; the async twin is a coroutine to `await`, with the same return types and error case, and where the **Async Type** column differs, pass the type it names | Getting a client |
 | **Parsed raises, raw returns** — `ApiError` versus `ApiResult` | Error-handling model |
 | **Case B error is always `RawError`** — also the last arm of every Case A alias, where a block's **Error arms** bullet ends in it | Error-handling model |
-| **A trailing `request_options`** — keyword-only and optional, for per-call overrides such as a timeout or extra headers; every signature ends with it | here (`swagger_petstore_open_api_3_0/core/request_options.py`) |
+| **A trailing `request_options`** — keyword-only and optional, for per-call overrides such as a timeout, extra headers, `max_retries`, `status_codes_to_retry` or `log_level`; every signature ends with it | here (`swagger_petstore_open_api_3_1_0/core/request_options.py`), Retries, Logging |
 | **Each operation names its own server** — this SDK declares several, so every block carries a **Server** bullet with the server's key in `server_config=` | its block |
 | **Parameter names are literal** — signatures are generated code verbatim, and everything behind the bare `*` must be passed by name | here |
 | **A parameter's wire name is its Python name** — sent as-is on the path, query string, header or body, unless the block's **Params** bullet carries a wire name beside the role | here |
@@ -137,23 +180,23 @@ Each links to a sub-page with one block per operation, headed by its full access
 
 Sub-pages chunk per `###` block: each block is self-contained given the table above, and assumes this page is loaded beside it.
 
-| Controller | Ops | Page |
-| --- | --- | --- |
-| `client.pet_api` | 8 | [map/operations/pet_api.md](map/operations/pet_api.md) |
-| `client.store` | 4 | [map/operations/store.md](map/operations/store.md) |
-| `client.user_api` | 7 | [map/operations/user_api.md](map/operations/user_api.md) |
+| Controller | Class | Ops | Page |
+| --- | --- | --- | --- |
+| `client.pet_api` | `PetApi` / `AsyncPetApi` | 8 | [map/operations/pet_api.md](map/operations/pet_api.md) |
+| `client.store` | `Store` / `AsyncStore` | 4 | [map/operations/store.md](map/operations/store.md) |
+| `client.user_api` | `UserApi` / `AsyncUserApi` | 7 | [map/operations/user_api.md](map/operations/user_api.md) |
 
 ---
 
 ## Models — where they live, how to build them
 
-**Shapes live only in the source.** Every module under `swagger_petstore_open_api_3_0/models/` declares one type plus its input companion, and every module under `swagger_petstore_open_api_3_0/errors/` one alias plus the mapper that builds it; no two share a name. Take a type's module from the operation's **Type sources** table. When no retrieved chunk names it, the module is the type name in snake_case under the kind's directory below (`ApiResponse` ↔ `api_response.py`; an error alias drops its `Body` suffix: `AddPetErrorBody` ↔ `add_pet_error.py`). Never grep for a type.
+**Shapes live only in the source.** Every module under `swagger_petstore_open_api_3_1_0/models/` declares one type plus its input companion, and every module under `swagger_petstore_open_api_3_1_0/errors/` one alias plus the mapper that builds it; no two share a name. Take a type's module from the operation's **Type sources** table. When no retrieved chunk names it, the module is the type name in snake_case under the kind's directory below (`ApiResponse` ↔ `api_response.py`; an error alias drops its `Body` suffix: `AddPetErrorBody` ↔ `add_pet_error.py`). Never grep for a type.
 
 | Group | Count | Directory (module = `<type_name>.py`) |
 | --- | --- | --- |
-| Models (`SdkBaseModel` pydantic classes) | 6 | `swagger_petstore_open_api_3_0/models/` |
-| Enums (`Enum` over `str`) — Python member names + wire values | 2 | `swagger_petstore_open_api_3_0/models/enums/` |
-| Error aliases (one per Case A operation) | 15 | `swagger_petstore_open_api_3_0/errors/` |
+| Models (`SdkBaseModel` pydantic classes) | 6 | `swagger_petstore_open_api_3_1_0/models/` |
+| Enums (`Enum` over `str`) — Python member names + wire values | 2 | `swagger_petstore_open_api_3_1_0/models/enums/` |
+| Error aliases (one per Case A operation) | 15 | `swagger_petstore_open_api_3_1_0/errors/` |
 
 Conventions: a model is a `SdkBaseModel` (pydantic) class; a field whose wire name differs from its Python name carries it as `Field(alias=…)` (`type_` ↔ `"type"`) — read the alias off the field rather than deriving it. An omittable field is annotated `Optional[T]` and defaults to `UNSET`, and one that may also be explicitly null is `OptionalNullable[T]`; both come from `core` and neither is `typing.Optional` — there is no `None` arm unless the spec declared the property nullable, so passing `None` to the first is a type error rather than a value that serializes.
 
@@ -163,12 +206,12 @@ Import paths by content type (`from <package> import <Name>`):
 
 | Contents | Import from |
 | --- | --- |
-| Client (root) | `swagger_petstore_open_api_3_0` |
-| Operation controllers | `swagger_petstore_open_api_3_0.apis` |
-| Models | `swagger_petstore_open_api_3_0.models` |
-| Enums | `swagger_petstore_open_api_3_0.models.enums` |
-| Error aliases | `swagger_petstore_open_api_3_0.errors` |
-| Core runtime (`ApiError`, `ApiResult`, `RawError`, …) | `swagger_petstore_open_api_3_0.core` |
+| Client (root) | `swagger_petstore_open_api_3_1_0` |
+| Operation controllers | `swagger_petstore_open_api_3_1_0.apis` |
+| Models | `swagger_petstore_open_api_3_1_0.models` |
+| Enums | `swagger_petstore_open_api_3_1_0.models.enums` |
+| Error aliases | `swagger_petstore_open_api_3_1_0.errors` |
+| Core runtime (`ApiError`, `ApiResult`, `RawError`, …) | `swagger_petstore_open_api_3_1_0.core` |
 
 ---
 
@@ -187,7 +230,7 @@ A scheme you did not configure is skipped silently rather than raising, and the 
 
 **One environment.** The spec declares a single environment, so no `environment` keyword exists and there is nothing to select.
 
-**2 servers.** Base-URL templates and override points (`swagger_petstore_open_api_3_0/server/server_config.py`):
+**2 servers.** Base-URL templates and override points (`swagger_petstore_open_api_3_1_0/server/server_config.py`):
 
 | Server | Base URL | Override point |
 | --- | --- | --- |
